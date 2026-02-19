@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import OpenAI from 'openai'
-import { SYMPATHETIC_SYSTEM_PROMPT } from './prompts'
+import { SYCOPHANTIC_SYSTEM_PROMPT } from './prompts'
 import './App.css'
 
 const openai = new OpenAI({
@@ -33,7 +33,7 @@ function App() {
 
     try {
       const apiMessages = [
-        { role: 'system', content: SYMPATHETIC_SYSTEM_PROMPT },
+        { role: 'system', content: SYCOPHANTIC_SYSTEM_PROMPT },
         ...messages.map((m) => ({ role: m.role, content: m.content })),
         userMessage,
       ]
