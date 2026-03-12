@@ -15,7 +15,7 @@
 
 .chat-header h1 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   font-weight: 600;
 }
 
@@ -31,7 +31,7 @@
 .placeholder {
   color: var(--muted);
   margin: auto;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
 .message {
@@ -54,6 +54,7 @@
   line-height: 1.45;
   white-space: pre-wrap;
   word-break: break-word;
+  font-size: 1.05rem;
 }
 
 .message-user .message-bubble {
