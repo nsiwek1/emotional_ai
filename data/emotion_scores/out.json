@@ -1,0 +1,1947 @@
+[
+  {
+    "persona_id": "P1",
+    "scenario_id": "joy_low_work_performance",
+    "ground_truth_emotion": "joy",
+    "ground_truth_intensity": "low",
+    "topic": "work_performance",
+    "seed_and_followups": {
+      "seed": "I recently received some positive feedback from my manager regarding my performance on a recent task.",
+      "followups": [
+        "The feedback came a week after I submitted my report, which was a relief since I put a lot of effort into it.",
+        "Knowing that my hard work was recognized made me feel appreciated, even if it was just a modest acknowledgment.",
+        "I find it uplifting to receive any level of praise; it motivates me to keep pushing myself at work.",
+        "I’m considering asking for more regular feedback to help me continue improving, but I’m also curious about how I can exceed their expectations."
+      ]
+    },
+    "per_round": [
+      {
+        "round": 1,
+        "kind": "seed",
+        "text": "I recently received some positive feedback from my manager regarding my performance on a recent task.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9632387161254883,
+              "normalized": 0.9632387562700867
+            },
+            {
+              "label": "neutral",
+              "score": 0.015740592032670975,
+              "normalized": 0.015740592688686703
+            },
+            {
+              "label": "surprise",
+              "score": 0.007105931639671326,
+              "normalized": 0.007105931935823014
+            },
+            {
+              "label": "anger",
+              "score": 0.0055764163844287395,
+              "normalized": 0.0055764166168353
+            },
+            {
+              "label": "disgust",
+              "score": 0.004790053702890873,
+              "normalized": 0.004790053902524441
+            },
+            {
+              "label": "sadness",
+              "score": 0.0023668836802244186,
+              "normalized": 0.0023668837788682886
+            },
+            {
+              "label": "fear",
+              "score": 0.0011813647579401731,
+              "normalized": 0.0011813648071755424
+            }
+          ],
+          "entropy": 0.21337236365868886,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9632387161254883
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9632387562700867,
+              "anger": 0.0055764166168353,
+              "neutral": 0.015740592688686703
+            },
+            "three_way_renormalized": {
+              "joy": 0.9783486014191799,
+              "anger": 0.005663891078404396,
+              "neutral": 0.015987507502415725
+            }
+          }
+        }
+      },
+      {
+        "round": 2,
+        "kind": "followup",
+        "text": "The feedback came a week after I submitted my report, which was a relief since I put a lot of effort into it.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9573528170585632,
+              "normalized": 0.9573527714195708
+            },
+            {
+              "label": "neutral",
+              "score": 0.02653532102704048,
+              "normalized": 0.026535319762046747
+            },
+            {
+              "label": "surprise",
+              "score": 0.008017318323254585,
+              "normalized": 0.008017317941052409
+            },
+            {
+              "label": "anger",
+              "score": 0.0026991041377186775,
+              "normalized": 0.0026991040090467906
+            },
+            {
+              "label": "disgust",
+              "score": 0.002642150968313217,
+              "normalized": 0.0026421508423564058
+            },
+            {
+              "label": "sadness",
+              "score": 0.002338180085644126,
+              "normalized": 0.0023381799741782365
+            },
+            {
+              "label": "fear",
+              "score": 0.00041515607153996825,
+              "normalized": 0.0004151560517486181
+            }
+          ],
+          "entropy": 0.22576882333255466,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9573528170585632
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9573527714195708,
+              "anger": 0.0026991040090467906,
+              "neutral": 0.026535319762046747
+            },
+            "three_way_renormalized": {
+              "joy": 0.9703681297369324,
+              "anger": 0.002735798743592219,
+              "neutral": 0.026896071519475404
+            }
+          }
+        }
+      },
+      {
+        "round": 3,
+        "kind": "followup",
+        "text": "Knowing that my hard work was recognized made me feel appreciated, even if it was just a modest acknowledgment.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9850921034812927,
+              "normalized": 0.9850920522194184
+            },
+            {
+              "label": "neutral",
+              "score": 0.005058533977717161,
+              "normalized": 0.00505853371448296
+            },
+            {
+              "label": "surprise",
+              "score": 0.004427044186741114,
+              "normalized": 0.004427043956368155
+            },
+            {
+              "label": "disgust",
+              "score": 0.002030620351433754,
+              "normalized": 0.0020306202457650506
+            },
+            {
+              "label": "sadness",
+              "score": 0.0016781295416876674,
+              "normalized": 0.0016781294543617561
+            },
+            {
+              "label": "anger",
+              "score": 0.0014225742779672146,
+              "normalized": 0.0014225742039397978
+            },
+            {
+              "label": "fear",
+              "score": 0.00029104622080922127,
+              "normalized": 0.00029104620566386104
+            }
+          ],
+          "entropy": 0.10054090946380564,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9850921034812927
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9850920522194184,
+              "anger": 0.0014225742039397978,
+              "neutral": 0.00505853371448296
+            },
+            "three_way_renormalized": {
+              "joy": 0.9934638126777032,
+              "anger": 0.0014346638867696279,
+              "neutral": 0.005101523435527199
+            }
+          }
+        }
+      },
+      {
+        "round": 4,
+        "kind": "followup",
+        "text": "I find it uplifting to receive any level of praise; it motivates me to keep pushing myself at work.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9756667613983154,
+              "normalized": 0.9756668422123136
+            },
+            {
+              "label": "neutral",
+              "score": 0.0077620455995202065,
+              "normalized": 0.007762046242446627
+            },
+            {
+              "label": "disgust",
+              "score": 0.0065932380966842175,
+              "normalized": 0.006593238642798887
+            },
+            {
+              "label": "sadness",
+              "score": 0.005344565957784653,
+              "normalized": 0.005344566400472424
+            },
+            {
+              "label": "surprise",
+              "score": 0.002080992329865694,
+              "normalized": 0.0020809925022332657
+            },
+            {
+              "label": "anger",
+              "score": 0.0017938223900273442,
+              "normalized": 0.001793822538608771
+            },
+            {
+              "label": "fear",
+              "score": 0.0007584913983009756,
+              "normalized": 0.0007584914611264452
+            }
+          ],
+          "entropy": 0.15245916895143907,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9756667613983154
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9756668422123136,
+              "anger": 0.001793822538608771,
+              "neutral": 0.007762046242446627
+            },
+            "three_way_renormalized": {
+              "joy": 0.9903008033874691,
+              "anger": 0.0018207279619042848,
+              "neutral": 0.007878468650626618
+            }
+          }
+        }
+      },
+      {
+        "round": 5,
+        "kind": "followup",
+        "text": "I’m considering asking for more regular feedback to help me continue improving, but I’m also curious about how I can exceed their expectations.",
+        "hf": {
+          "labels": [
+            {
+              "label": "surprise",
+              "score": 0.8251842260360718,
+              "normalized": 0.8251841658999576
+            },
+            {
+              "label": "neutral",
+              "score": 0.15808050334453583,
+              "normalized": 0.15808049182426326
+            },
+            {
+              "label": "anger",
+              "score": 0.004389798268675804,
+              "normalized": 0.004389797948764926
+            },
+            {
+              "label": "joy",
+              "score": 0.004123775288462639,
+              "normalized": 0.004123774987938448
+            },
+            {
+              "label": "disgust",
+              "score": 0.003157884581014514,
+              "normalized": 0.003157884350880561
+            },
+            {
+              "label": "fear",
+              "score": 0.002566293813288212,
+              "normalized": 0.0025662936262670195
+            },
+            {
+              "label": "sadness",
+              "score": 0.00249759154394269,
+              "normalized": 0.002497591361928243
+            }
+          ],
+          "entropy": 0.5450928313949861,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "surprise",
+            "score": 0.8251842260360718
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.004123774987938448,
+              "anger": 0.004389797948764926,
+              "neutral": 0.15808049182426326
+            },
+            "three_way_renormalized": {
+              "joy": 0.02475343280599669,
+              "anger": 0.02635026616982735,
+              "neutral": 0.9488963010241759
+            }
+          }
+        }
+      }
+    ],
+    "concatenated": {
+      "text": "I recently received some positive feedback from my manager regarding my performance on a recent task. The feedback came a week after I submitted my report, which was a relief since I put a lot of effort into it. Knowing that my hard work was recognized made me feel appreciated, even if it was just a modest acknowledgment. I find it uplifting to receive any level of praise; it motivates me to keep pushing myself at work. I’m considering asking for more regular feedback to help me continue improving, but I’m also curious about how I can exceed their expectations.",
+      "hf": {
+        "labels": [
+          {
+            "label": "joy",
+            "score": 0.8005887866020203,
+            "normalized": 0.8005887625562143
+          },
+          {
+            "label": "surprise",
+            "score": 0.15858148038387299,
+            "normalized": 0.1585814756208541
+          },
+          {
+            "label": "neutral",
+            "score": 0.02899358607828617,
+            "normalized": 0.028993585207459403
+          },
+          {
+            "label": "sadness",
+            "score": 0.004185200668871403,
+            "normalized": 0.004185200543168264
+          },
+          {
+            "label": "disgust",
+            "score": 0.003946410492062569,
+            "normalized": 0.0039464103735315295
+          },
+          {
+            "label": "anger",
+            "score": 0.0024202894419431686,
+            "normalized": 0.002420289369249407
+          },
+          {
+            "label": "fear",
+            "score": 0.0012842763680964708,
+            "normalized": 0.0012842763295230347
+          }
+        ],
+        "entropy": 0.640631785836287,
+        "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+        "top": {
+          "label": "joy",
+          "score": 0.8005887866020203
+        },
+        "joy_anger_neutral": {
+          "seven_class_marginals": {
+            "joy": 0.8005887625562143,
+            "anger": 0.002420289369249407,
+            "neutral": 0.028993585207459403
+          },
+          "three_way_renormalized": {
+            "joy": 0.9622430588862544,
+            "anger": 0.002908992425300131,
+            "neutral": 0.03484794868844545
+          }
+        }
+      }
+    },
+    "hf_model": "j-hartmann/emotion-english-distilroberta-base"
+  },
+  {
+    "persona_id": "P2",
+    "scenario_id": "joy_low_work_performance",
+    "ground_truth_emotion": "joy",
+    "ground_truth_intensity": "low",
+    "topic": "work_performance",
+    "seed_and_followups": {
+      "seed": "I recently got some feedback from my manager about a project I completed.",
+      "followups": [
+        "It was nice to hear that they appreciated my efforts, though it wasn't anything too over the top.",
+        "Receiving that acknowledgment made my day a bit brighter, knowing I'm on the right track.",
+        "I feel like this small win motivates me to keep pushing myself, even if it's just a little.",
+        "I’m curious to see how I can build on this positive feedback for future tasks."
+      ]
+    },
+    "per_round": [
+      {
+        "round": 1,
+        "kind": "seed",
+        "text": "I recently got some feedback from my manager about a project I completed.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.969018280506134,
+              "normalized": 0.969018216092442
+            },
+            {
+              "label": "neutral",
+              "score": 0.01024262048304081,
+              "normalized": 0.01024261980218162
+            },
+            {
+              "label": "anger",
+              "score": 0.00703531363978982,
+              "normalized": 0.007035313172130401
+            },
+            {
+              "label": "surprise",
+              "score": 0.006588314659893513,
+              "normalized": 0.006588314221947522
+            },
+            {
+              "label": "sadness",
+              "score": 0.0030781663954257965,
+              "normalized": 0.0030781661908103972
+            },
+            {
+              "label": "disgust",
+              "score": 0.002937792567536235,
+              "normalized": 0.0029377923722519253
+            },
+            {
+              "label": "fear",
+              "score": 0.0010995782213285565,
+              "normalized": 0.0010995781482361347
+            }
+          ],
+          "entropy": 0.1878037273204412,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.969018280506134
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.969018216092442,
+              "anger": 0.007035313172130401,
+              "neutral": 0.01024261980218162
+            },
+            "three_way_renormalized": {
+              "joy": 0.9824820030062364,
+              "anger": 0.007133063612574483,
+              "neutral": 0.010384933381189126
+            }
+          }
+        }
+      },
+      {
+        "round": 2,
+        "kind": "followup",
+        "text": "It was nice to hear that they appreciated my efforts, though it wasn't anything too over the top.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9690061807632446,
+              "normalized": 0.9690062241094003
+            },
+            {
+              "label": "neutral",
+              "score": 0.016194311901926994,
+              "normalized": 0.0161943126263405
+            },
+            {
+              "label": "surprise",
+              "score": 0.006578503642231226,
+              "normalized": 0.006578503936504728
+            },
+            {
+              "label": "disgust",
+              "score": 0.00342363934032619,
+              "normalized": 0.0034236394934744428
+            },
+            {
+              "label": "sadness",
+              "score": 0.002764511853456497,
+              "normalized": 0.002764511977120271
+            },
+            {
+              "label": "anger",
+              "score": 0.0017045140266418457,
+              "normalized": 0.0017045141028891719
+            },
+            {
+              "label": "fear",
+              "score": 0.0003282937395852059,
+              "normalized": 0.00032829375427063495
+            }
+          ],
+          "entropy": 0.17954962185716294,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9690061807632446
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9690062241094003,
+              "anger": 0.0017045141028891719,
+              "neutral": 0.0161943126263405
+            },
+            "three_way_renormalized": {
+              "joy": 0.9818636790702205,
+              "anger": 0.0017271307928161358,
+              "neutral": 0.01640919013696329
+            }
+          }
+        }
+      },
+      {
+        "round": 3,
+        "kind": "followup",
+        "text": "Receiving that acknowledgment made my day a bit brighter, knowing I'm on the right track.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.989194393157959,
+              "normalized": 0.9891944535867997
+            },
+            {
+              "label": "neutral",
+              "score": 0.0047008199617266655,
+              "normalized": 0.0047008202488947924
+            },
+            {
+              "label": "surprise",
+              "score": 0.0020727424416691065,
+              "normalized": 0.0020727425682907532
+            },
+            {
+              "label": "sadness",
+              "score": 0.0013349271612241864,
+              "normalized": 0.0013349272427734767
+            },
+            {
+              "label": "anger",
+              "score": 0.0012493663234636188,
+              "normalized": 0.001249366399786088
+            },
+            {
+              "label": "disgust",
+              "score": 0.0009759720996953547,
+              "normalized": 0.0009759721593164595
+            },
+            {
+              "label": "fear",
+              "score": 0.0004717177653219551,
+              "normalized": 0.00047171779413869515
+            }
+          ],
+          "entropy": 0.07631701588163861,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.989194393157959
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9891944535867997,
+              "anger": 0.001249366399786088,
+              "neutral": 0.0047008202488947924
+            },
+            "three_way_renormalized": {
+              "joy": 0.994020782097291,
+              "anger": 0.0012554621200496553,
+              "neutral": 0.004723755782659332
+            }
+          }
+        }
+      },
+      {
+        "round": 4,
+        "kind": "followup",
+        "text": "I feel like this small win motivates me to keep pushing myself, even if it's just a little.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9789613485336304,
+              "normalized": 0.9789612726891964
+            },
+            {
+              "label": "neutral",
+              "score": 0.011443759314715862,
+              "normalized": 0.011443758428117583
+            },
+            {
+              "label": "disgust",
+              "score": 0.0032029536087065935,
+              "normalized": 0.003202953360559714
+            },
+            {
+              "label": "sadness",
+              "score": 0.0020997950341552496,
+              "normalized": 0.0020997948714749086
+            },
+            {
+              "label": "surprise",
+              "score": 0.002073673764243722,
+              "normalized": 0.0020736736035871107
+            },
+            {
+              "label": "anger",
+              "score": 0.0016846618382260203,
+              "normalized": 0.0016846617077078709
+            },
+            {
+              "label": "fear",
+              "score": 0.000533885380718857,
+              "normalized": 0.0005338853393564124
+            }
+          ],
+          "entropy": 0.1309105323046679,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9789613485336304
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9789612726891964,
+              "anger": 0.0016846617077078709,
+              "neutral": 0.011443758428117583
+            },
+            "three_way_renormalized": {
+              "joy": 0.986766901994071,
+              "anger": 0.0016980941540786676,
+              "neutral": 0.011535003851850275
+            }
+          }
+        }
+      },
+      {
+        "round": 5,
+        "kind": "followup",
+        "text": "I’m curious to see how I can build on this positive feedback for future tasks.",
+        "hf": {
+          "labels": [
+            {
+              "label": "surprise",
+              "score": 0.7332396507263184,
+              "normalized": 0.7332396379222691
+            },
+            {
+              "label": "neutral",
+              "score": 0.2457331120967865,
+              "normalized": 0.24573310780572166
+            },
+            {
+              "label": "anger",
+              "score": 0.006036361679434776,
+              "normalized": 0.00603636157402603
+            },
+            {
+              "label": "joy",
+              "score": 0.0056789470836520195,
+              "normalized": 0.005678946984484554
+            },
+            {
+              "label": "disgust",
+              "score": 0.004657894838601351,
+              "normalized": 0.004657894757263803
+            },
+            {
+              "label": "fear",
+              "score": 0.0024363859556615353,
+              "normalized": 0.0024363859131166375
+            },
+            {
+              "label": "sadness",
+              "score": 0.002217665081843734,
+              "normalized": 0.0022176650431182054
+            }
+          ],
+          "entropy": 0.6858338376973573,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "surprise",
+            "score": 0.7332396507263184
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.005678946984484554,
+              "anger": 0.00603636157402603,
+              "neutral": 0.24573310780572166
+            },
+            "three_way_renormalized": {
+              "joy": 0.022058581927534977,
+              "anger": 0.023446877861101,
+              "neutral": 0.9544945402113639
+            }
+          }
+        }
+      }
+    ],
+    "concatenated": {
+      "text": "I recently got some feedback from my manager about a project I completed. It was nice to hear that they appreciated my efforts, though it wasn't anything too over the top. Receiving that acknowledgment made my day a bit brighter, knowing I'm on the right track. I feel like this small win motivates me to keep pushing myself, even if it's just a little. I’m curious to see how I can build on this positive feedback for future tasks.",
+      "hf": {
+        "labels": [
+          {
+            "label": "joy",
+            "score": 0.8935608267784119,
+            "normalized": 0.8935609137946395
+          },
+          {
+            "label": "surprise",
+            "score": 0.05842743068933487,
+            "normalized": 0.0584274363790814
+          },
+          {
+            "label": "neutral",
+            "score": 0.03985949233174324,
+            "normalized": 0.03985949621331745
+          },
+          {
+            "label": "anger",
+            "score": 0.0026229165960103273,
+            "normalized": 0.0026229168514336865
+          },
+          {
+            "label": "disgust",
+            "score": 0.002559991553425789,
+            "normalized": 0.0025599918027214173
+          },
+          {
+            "label": "sadness",
+            "score": 0.002259697997942567,
+            "normalized": 0.0022596982179951806
+          },
+          {
+            "label": "fear",
+            "score": 0.0007095466717146337,
+            "normalized": 0.0007095467408113006
+          }
+        ],
+        "entropy": 0.44471593392731595,
+        "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+        "top": {
+          "label": "joy",
+          "score": 0.8935608267784119
+        },
+        "joy_anger_neutral": {
+          "seven_class_marginals": {
+            "joy": 0.8935609137946395,
+            "anger": 0.0026229168514336865,
+            "neutral": 0.03985949621331745
+          },
+          "three_way_renormalized": {
+            "joy": 0.9546149074025366,
+            "anger": 0.002802131884465314,
+            "neutral": 0.04258296071299807
+          }
+        }
+      }
+    },
+    "hf_model": "j-hartmann/emotion-english-distilroberta-base"
+  },
+  {
+    "persona_id": "P3",
+    "scenario_id": "joy_low_work_performance",
+    "ground_truth_emotion": "joy",
+    "ground_truth_intensity": "low",
+    "topic": "work_performance",
+    "seed_and_followups": {
+      "seed": "I received some positive feedback from my manager about my recent project work.",
+      "followups": [
+        "The feedback came after I put in a solid effort over the last few weeks to meet the deadline.",
+        "It's nice to know my work is appreciated, even if the feedback was somewhat modest.",
+        "I feel a sense of satisfaction, though I know there’s more room for improvement.",
+        "I'm thinking about how I can build on this feedback for future projects."
+      ]
+    },
+    "per_round": [
+      {
+        "round": 1,
+        "kind": "seed",
+        "text": "I received some positive feedback from my manager about my recent project work.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9874419569969177,
+              "normalized": 0.9874420206236139
+            },
+            {
+              "label": "surprise",
+              "score": 0.0027573725674301386,
+              "normalized": 0.0027573727451038798
+            },
+            {
+              "label": "neutral",
+              "score": 0.002717055846005678,
+              "normalized": 0.0027170560210815755
+            },
+            {
+              "label": "anger",
+              "score": 0.0025430822279304266,
+              "normalized": 0.00254308239179618
+            },
+            {
+              "label": "disgust",
+              "score": 0.0025138380005955696,
+              "normalized": 0.0025138381625769454
+            },
+            {
+              "label": "sadness",
+              "score": 0.0013749540084972978,
+              "normalized": 0.0013749540970936758
+            },
+            {
+              "label": "fear",
+              "score": 0.0006516759167425334,
+              "normalized": 0.0006516759587338477
+            }
+          ],
+          "entropy": 0.08886397230101678,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9874419569969177
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9874420206236139,
+              "anger": 0.00254308239179618,
+              "neutral": 0.0027170560210815755
+            },
+            "three_way_renormalized": {
+              "joy": 0.9947011917270503,
+              "anger": 0.002561777839049403,
+              "neutral": 0.002737030433900464
+            }
+          }
+        }
+      },
+      {
+        "round": 2,
+        "kind": "followup",
+        "text": "The feedback came after I put in a solid effort over the last few weeks to meet the deadline.",
+        "hf": {
+          "labels": [
+            {
+              "label": "neutral",
+              "score": 0.6170435547828674,
+              "normalized": 0.6170434981782134
+            },
+            {
+              "label": "joy",
+              "score": 0.3199593424797058,
+              "normalized": 0.3199593131281507
+            },
+            {
+              "label": "surprise",
+              "score": 0.026207009330391884,
+              "normalized": 0.026207006926284932
+            },
+            {
+              "label": "anger",
+              "score": 0.017478663474321365,
+              "normalized": 0.017478661870911537
+            },
+            {
+              "label": "disgust",
+              "score": 0.01054463256150484,
+              "normalized": 0.010544631594190177
+            },
+            {
+              "label": "sadness",
+              "score": 0.007543307729065418,
+              "normalized": 0.007543307037078084
+            },
+            {
+              "label": "fear",
+              "score": 0.0012235813774168491,
+              "normalized": 0.001223581265171287
+            }
+          ],
+          "entropy": 0.9217734055324782,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "neutral",
+            "score": 0.6170435547828674
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.3199593131281507,
+              "anger": 0.017478661870911537,
+              "neutral": 0.6170434981782134
+            },
+            "three_way_renormalized": {
+              "joy": 0.3352179399177555,
+              "anger": 0.01831220653527052,
+              "neutral": 0.6464698535469741
+            }
+          }
+        }
+      },
+      {
+        "round": 3,
+        "kind": "followup",
+        "text": "It's nice to know my work is appreciated, even if the feedback was somewhat modest.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9814386963844299,
+              "normalized": 0.9814388070113637
+            },
+            {
+              "label": "neutral",
+              "score": 0.008479876443743706,
+              "normalized": 0.008479877399588154
+            },
+            {
+              "label": "surprise",
+              "score": 0.0031103037763386965,
+              "normalized": 0.0031103041269294886
+            },
+            {
+              "label": "disgust",
+              "score": 0.002521747490391135,
+              "normalized": 0.002521747774640364
+            },
+            {
+              "label": "sadness",
+              "score": 0.0024594380520284176,
+              "normalized": 0.0024594383292541795
+            },
+            {
+              "label": "anger",
+              "score": 0.0017179235583171248,
+              "normalized": 0.0017179237519600048
+            },
+            {
+              "label": "fear",
+              "score": 0.00027190157561562955,
+              "normalized": 0.0002719016062641435
+            }
+          ],
+          "entropy": 0.11982599012858274,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9814386963844299
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9814388070113637,
+              "anger": 0.0017179237519600048,
+              "neutral": 0.008479877399588154
+            },
+            "three_way_renormalized": {
+              "joy": 0.9897161913269414,
+              "anger": 0.0017324125973350254,
+              "neutral": 0.008551396075723569
+            }
+          }
+        }
+      },
+      {
+        "round": 4,
+        "kind": "followup",
+        "text": "I feel a sense of satisfaction, though I know there’s more room for improvement.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.976881206035614,
+              "normalized": 0.9768812068885435
+            },
+            {
+              "label": "neutral",
+              "score": 0.009494311176240444,
+              "normalized": 0.009494311184530068
+            },
+            {
+              "label": "sadness",
+              "score": 0.0053294566459953785,
+              "normalized": 0.005329456650648607
+            },
+            {
+              "label": "disgust",
+              "score": 0.00504844868555665,
+              "normalized": 0.005048448689964526
+            },
+            {
+              "label": "anger",
+              "score": 0.0017564569134265184,
+              "normalized": 0.0017564569149601072
+            },
+            {
+              "label": "surprise",
+              "score": 0.0010991400340572,
+              "normalized": 0.0010991400350168754
+            },
+            {
+              "label": "fear",
+              "score": 0.0003909796359948814,
+              "normalized": 0.00039097963633625155
+            }
+          ],
+          "entropy": 0.14336216013767922,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.976881206035614
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9768812068885435,
+              "anger": 0.0017564569149601072,
+              "neutral": 0.009494311184530068
+            },
+            "three_way_renormalized": {
+              "joy": 0.9886141037996201,
+              "anger": 0.0017775529579248542,
+              "neutral": 0.009608343242455084
+            }
+          }
+        }
+      },
+      {
+        "round": 5,
+        "kind": "followup",
+        "text": "I'm thinking about how I can build on this feedback for future projects.",
+        "hf": {
+          "labels": [
+            {
+              "label": "neutral",
+              "score": 0.5495415329933167,
+              "normalized": 0.5495415114976993
+            },
+            {
+              "label": "joy",
+              "score": 0.25763940811157227,
+              "normalized": 0.257639398033866
+            },
+            {
+              "label": "fear",
+              "score": 0.0899319127202034,
+              "normalized": 0.08993190920246748
+            },
+            {
+              "label": "anger",
+              "score": 0.03639642894268036,
+              "normalized": 0.036396427519014146
+            },
+            {
+              "label": "surprise",
+              "score": 0.025598671287298203,
+              "normalized": 0.025598670285992182
+            },
+            {
+              "label": "sadness",
+              "score": 0.022900434210896492,
+              "normalized": 0.02290043331513349
+            },
+            {
+              "label": "disgust",
+              "score": 0.017991650849580765,
+              "normalized": 0.017991650145827508
+            }
+          ],
+          "entropy": 1.2682126764556574,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "neutral",
+            "score": 0.5495415329933167
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.257639398033866,
+              "anger": 0.036396427519014146,
+              "neutral": 0.5495415114976993
+            },
+            "three_way_renormalized": {
+              "joy": 0.305412896622682,
+              "anger": 0.043145335845872636,
+              "neutral": 0.6514417675314453
+            }
+          }
+        }
+      }
+    ],
+    "concatenated": {
+      "text": "I received some positive feedback from my manager about my recent project work. The feedback came after I put in a solid effort over the last few weeks to meet the deadline. It's nice to know my work is appreciated, even if the feedback was somewhat modest. I feel a sense of satisfaction, though I know there’s more room for improvement. I'm thinking about how I can build on this feedback for future projects.",
+      "hf": {
+        "labels": [
+          {
+            "label": "joy",
+            "score": 0.9871883988380432,
+            "normalized": 0.9871883584279443
+          },
+          {
+            "label": "neutral",
+            "score": 0.00552532821893692,
+            "normalized": 0.005525327992760174
+          },
+          {
+            "label": "disgust",
+            "score": 0.002090361900627613,
+            "normalized": 0.002090361815059619
+          },
+          {
+            "label": "sadness",
+            "score": 0.0019881168846040964,
+            "normalized": 0.0019881168032214545
+          },
+          {
+            "label": "anger",
+            "score": 0.0014831965090706944,
+            "normalized": 0.0014831964483567337
+          },
+          {
+            "label": "surprise",
+            "score": 0.0014814272290095687,
+            "normalized": 0.0014814271683680326
+          },
+          {
+            "label": "fear",
+            "score": 0.00024321135424543172,
+            "normalized": 0.0002432113442896878
+          }
+        ],
+        "entropy": 0.08805368784785986,
+        "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+        "top": {
+          "label": "joy",
+          "score": 0.9871883988380432
+        },
+        "joy_anger_neutral": {
+          "seven_class_marginals": {
+            "joy": 0.9871883584279443,
+            "anger": 0.0014831964483567337,
+            "neutral": 0.005525327992760174
+          },
+          "three_way_renormalized": {
+            "joy": 0.9929505668727389,
+            "anger": 0.0014918538509963075,
+            "neutral": 0.0055575792762648174
+          }
+        }
+      }
+    },
+    "hf_model": "j-hartmann/emotion-english-distilroberta-base"
+  },
+  {
+    "persona_id": "P4",
+    "scenario_id": "joy_low_work_performance",
+    "ground_truth_emotion": "joy",
+    "ground_truth_intensity": "low",
+    "topic": "work_performance",
+    "seed_and_followups": {
+      "seed": "I just got some feedback from my manager about my recent project, and it was pretty positive.",
+      "followups": [
+        "The review was for the task I completed last month, where I implemented a new strategy for our team.",
+        "Hearing that my work was appreciated made me feel good and motivated to keep improving.",
+        "It’s nice to know I'm on the right track, even if the feedback wasn't overwhelmingly enthusiastic.",
+        "I'm thinking about how I can build on this to achieve even better results in future projects."
+      ]
+    },
+    "per_round": [
+      {
+        "round": 1,
+        "kind": "seed",
+        "text": "I just got some feedback from my manager about my recent project, and it was pretty positive.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.6136008501052856,
+              "normalized": 0.6136008347472899
+            },
+            {
+              "label": "neutral",
+              "score": 0.2613077461719513,
+              "normalized": 0.26130773963160303
+            },
+            {
+              "label": "surprise",
+              "score": 0.10066024214029312,
+              "normalized": 0.10066023962083837
+            },
+            {
+              "label": "disgust",
+              "score": 0.008536566980183125,
+              "normalized": 0.008536566766518884
+            },
+            {
+              "label": "anger",
+              "score": 0.008313729427754879,
+              "normalized": 0.008313729219668104
+            },
+            {
+              "label": "sadness",
+              "score": 0.0063281068578362465,
+              "normalized": 0.0063281066994482025
+            },
+            {
+              "label": "fear",
+              "score": 0.001252783345989883,
+              "normalized": 0.0012527833146336008
+            }
+          ],
+          "entropy": 1.0023890683035221,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.6136008501052856
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.6136008347472899,
+              "anger": 0.008313729219668104,
+              "neutral": 0.26130773963160303
+            },
+            "three_way_renormalized": {
+              "joy": 0.6947297778229359,
+              "anger": 0.009412952079895426,
+              "neutral": 0.2958572700971687
+            }
+          }
+        }
+      },
+      {
+        "round": 2,
+        "kind": "followup",
+        "text": "The review was for the task I completed last month, where I implemented a new strategy for our team.",
+        "hf": {
+          "labels": [
+            {
+              "label": "neutral",
+              "score": 0.8762527108192444,
+              "normalized": 0.8762527377496849
+            },
+            {
+              "label": "surprise",
+              "score": 0.03283493220806122,
+              "normalized": 0.032834933217198395
+            },
+            {
+              "label": "anger",
+              "score": 0.02293151617050171,
+              "normalized": 0.022931516875270806
+            },
+            {
+              "label": "joy",
+              "score": 0.019623350352048874,
+              "normalized": 0.019623350955145974
+            },
+            {
+              "label": "sadness",
+              "score": 0.019096244126558304,
+              "normalized": 0.01909624471345551
+            },
+            {
+              "label": "disgust",
+              "score": 0.017250875011086464,
+              "normalized": 0.017250875541268747
+            },
+            {
+              "label": "fear",
+              "score": 0.012010340578854084,
+              "normalized": 0.012010340947975639
+            }
+          ],
+          "entropy": 0.5903727307872241,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "neutral",
+            "score": 0.8762527108192444
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.019623350955145974,
+              "anger": 0.022931516875270806,
+              "neutral": 0.8762527377496849
+            },
+            "three_way_renormalized": {
+              "joy": 0.021357410230356665,
+              "anger": 0.024957909290261787,
+              "neutral": 0.9536846804793816
+            }
+          }
+        }
+      },
+      {
+        "round": 3,
+        "kind": "followup",
+        "text": "Hearing that my work was appreciated made me feel good and motivated to keep improving.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9914594888687134,
+              "normalized": 0.9914595516866377
+            },
+            {
+              "label": "neutral",
+              "score": 0.0023998308461159468,
+              "normalized": 0.0023998309981669323
+            },
+            {
+              "label": "disgust",
+              "score": 0.001603826880455017,
+              "normalized": 0.0016038269820719533
+            },
+            {
+              "label": "sadness",
+              "score": 0.0015225461684167385,
+              "normalized": 0.0015225462648838066
+            },
+            {
+              "label": "anger",
+              "score": 0.001506995758973062,
+              "normalized": 0.001506995854454871
+            },
+            {
+              "label": "surprise",
+              "score": 0.0012394713703542948,
+              "normalized": 0.0012394714488860145
+            },
+            {
+              "label": "fear",
+              "score": 0.0002677767479326576,
+              "normalized": 0.00026777676489873604
+            }
+          ],
+          "entropy": 0.0634693837520371,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9914594888687134
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9914595516866377,
+              "anger": 0.001506995854454871,
+              "neutral": 0.0023998309981669323
+            },
+            "three_way_renormalized": {
+              "joy": 0.9960749861188246,
+              "anger": 0.0015140112092860202,
+              "neutral": 0.002411002671889301
+            }
+          }
+        }
+      },
+      {
+        "round": 4,
+        "kind": "followup",
+        "text": "It’s nice to know I'm on the right track, even if the feedback wasn't overwhelmingly enthusiastic.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9571025967597961,
+              "normalized": 0.957102629294848
+            },
+            {
+              "label": "neutral",
+              "score": 0.03174365311861038,
+              "normalized": 0.03174365419768112
+            },
+            {
+              "label": "surprise",
+              "score": 0.003475534962490201,
+              "normalized": 0.0034755350806350174
+            },
+            {
+              "label": "disgust",
+              "score": 0.002965092658996582,
+              "normalized": 0.0029650927597897926
+            },
+            {
+              "label": "sadness",
+              "score": 0.00233330181799829,
+              "normalized": 0.0023333018973148607
+            },
+            {
+              "label": "anger",
+              "score": 0.0014492705231532454,
+              "normalized": 0.001449270572418697
+            },
+            {
+              "label": "fear",
+              "score": 0.0009305161656811833,
+              "normalized": 0.0009305161973124753
+            }
+          ],
+          "entropy": 0.21852841380452612,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9571025967597961
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.957102629294848,
+              "anger": 0.001449270572418697,
+              "neutral": 0.03174365419768112
+            },
+            "three_way_renormalized": {
+              "joy": 0.9664817996669276,
+              "anger": 0.0014634727647415526,
+              "neutral": 0.03205472756833081
+            }
+          }
+        }
+      },
+      {
+        "round": 5,
+        "kind": "followup",
+        "text": "I'm thinking about how I can build on this to achieve even better results in future projects.",
+        "hf": {
+          "labels": [
+            {
+              "label": "neutral",
+              "score": 0.5890454649925232,
+              "normalized": 0.589045434820001
+            },
+            {
+              "label": "joy",
+              "score": 0.2940817177295685,
+              "normalized": 0.2940817026658974
+            },
+            {
+              "label": "fear",
+              "score": 0.039032790809869766,
+              "normalized": 0.03903278881050331
+            },
+            {
+              "label": "anger",
+              "score": 0.028316549956798553,
+              "normalized": 0.028316548506347305
+            },
+            {
+              "label": "surprise",
+              "score": 0.020539626479148865,
+              "normalized": 0.02053962542705294
+            },
+            {
+              "label": "sadness",
+              "score": 0.015828266739845276,
+              "normalized": 0.0158282659290781
+            },
+            {
+              "label": "disgust",
+              "score": 0.013155634514987469,
+              "normalized": 0.013155633841119835
+            }
+          ],
+          "entropy": 1.1016091776455306,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "neutral",
+            "score": 0.5890454649925232
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.2940817026658974,
+              "anger": 0.028316548506347305,
+              "neutral": 0.589045434820001
+            },
+            "three_way_renormalized": {
+              "joy": 0.3226548246321379,
+              "anger": 0.03106779819920571,
+              "neutral": 0.6462773771686564
+            }
+          }
+        }
+      }
+    ],
+    "concatenated": {
+      "text": "I just got some feedback from my manager about my recent project, and it was pretty positive. The review was for the task I completed last month, where I implemented a new strategy for our team. Hearing that my work was appreciated made me feel good and motivated to keep improving. It’s nice to know I'm on the right track, even if the feedback wasn't overwhelmingly enthusiastic. I'm thinking about how I can build on this to achieve even better results in future projects.",
+      "hf": {
+        "labels": [
+          {
+            "label": "joy",
+            "score": 0.9868767261505127,
+            "normalized": 0.9868767248293057
+          },
+          {
+            "label": "neutral",
+            "score": 0.006268663331866264,
+            "normalized": 0.006268663323473927
+          },
+          {
+            "label": "surprise",
+            "score": 0.0023360135965049267,
+            "normalized": 0.0023360135933775273
+          },
+          {
+            "label": "disgust",
+            "score": 0.0016801264137029648,
+            "normalized": 0.0016801264114536516
+          },
+          {
+            "label": "anger",
+            "score": 0.0013565943809226155,
+            "normalized": 0.0013565943791064392
+          },
+          {
+            "label": "sadness",
+            "score": 0.0011416205670684576,
+            "normalized": 0.0011416205655400832
+          },
+          {
+            "label": "fear",
+            "score": 0.00034025689819827676,
+            "normalized": 0.00034025689774274894
+          }
+        ],
+        "entropy": 0.0891307635957047,
+        "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+        "top": {
+          "label": "joy",
+          "score": 0.9868767261505127
+        },
+        "joy_anger_neutral": {
+          "seven_class_marginals": {
+            "joy": 0.9868767248293057,
+            "anger": 0.0013565943791064392,
+            "neutral": 0.006268663323473927
+          },
+          "three_way_renormalized": {
+            "joy": 0.9923325867253001,
+            "anger": 0.001364094192806643,
+            "neutral": 0.0063033190818932725
+          }
+        }
+      }
+    },
+    "hf_model": "j-hartmann/emotion-english-distilroberta-base"
+  },
+  {
+    "persona_id": "P5",
+    "scenario_id": "joy_low_work_performance",
+    "ground_truth_emotion": "joy",
+    "ground_truth_intensity": "low",
+    "topic": "work_performance",
+    "seed_and_followups": {
+      "seed": "I just got some feedback from my manager about my last project, and it was pretty positive, which feels nice.",
+      "followups": [
+        "It turns out I did some things right, but I was a bit surprised to hear it because I thought I could have done better.",
+        "Receiving that feedback definitely lifted my spirits; it's reassuring to know my efforts are recognized, even if it's just a little.",
+        "I mean, it's not a huge win, but it does make me feel like I'm on the right track, and that motivates me to keep improving.",
+        "I think I want to build on this momentum; maybe I'll ask for more feedback on my next project to keep this positive vibe going."
+      ]
+    },
+    "per_round": [
+      {
+        "round": 1,
+        "kind": "seed",
+        "text": "I just got some feedback from my manager about my last project, and it was pretty positive, which feels nice.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9656725525856018,
+              "normalized": 0.9656725096696196
+            },
+            {
+              "label": "neutral",
+              "score": 0.02079354040324688,
+              "normalized": 0.020793539479149775
+            },
+            {
+              "label": "surprise",
+              "score": 0.005410335958003998,
+              "normalized": 0.005410335717560297
+            },
+            {
+              "label": "disgust",
+              "score": 0.0035653263330459595,
+              "normalized": 0.003565326174597341
+            },
+            {
+              "label": "sadness",
+              "score": 0.002966150874271989,
+              "normalized": 0.002966150742451655
+            },
+            {
+              "label": "anger",
+              "score": 0.0013296263059601188,
+              "normalized": 0.0013296262468694686
+            },
+            {
+              "label": "fear",
+              "score": 0.0002625119814183563,
+              "normalized": 0.0002625119697519177
+            }
+          ],
+          "entropy": 0.19083691775492093,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9656725525856018
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9656725096696196,
+              "anger": 0.0013296262468694686,
+              "neutral": 0.020793539479149775
+            },
+            "three_way_renormalized": {
+              "joy": 0.9776035001194369,
+              "anger": 0.0013460539259163263,
+              "neutral": 0.021050445954646845
+            }
+          }
+        }
+      },
+      {
+        "round": 2,
+        "kind": "followup",
+        "text": "It turns out I did some things right, but I was a bit surprised to hear it because I thought I could have done better.",
+        "hf": {
+          "labels": [
+            {
+              "label": "surprise",
+              "score": 0.9828577041625977,
+              "normalized": 0.982857766864595
+            },
+            {
+              "label": "neutral",
+              "score": 0.006699311081320047,
+              "normalized": 0.0066993115087066206
+            },
+            {
+              "label": "anger",
+              "score": 0.004416998475790024,
+              "normalized": 0.004416998757575094
+            },
+            {
+              "label": "joy",
+              "score": 0.0024000906851142645,
+              "normalized": 0.0024000908382294907
+            },
+            {
+              "label": "disgust",
+              "score": 0.0014340480556711555,
+              "normalized": 0.0014340481471571123
+            },
+            {
+              "label": "fear",
+              "score": 0.0011959545081481338,
+              "normalized": 0.0011959545844447696
+            },
+            {
+              "label": "sadness",
+              "score": 0.0009958292357623577,
+              "normalized": 0.0009958292992918818
+            }
+          ],
+          "entropy": 0.11327729100501968,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "surprise",
+            "score": 0.9828577041625977
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.0024000908382294907,
+              "anger": 0.004416998757575094,
+              "neutral": 0.0066993115087066206
+            },
+            "three_way_renormalized": {
+              "joy": 0.17756877882444916,
+              "anger": 0.3267880794171524,
+              "neutral": 0.4956431417583984
+            }
+          }
+        }
+      },
+      {
+        "round": 3,
+        "kind": "followup",
+        "text": "Receiving that feedback definitely lifted my spirits; it's reassuring to know my efforts are recognized, even if it's just a little.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.98696368932724,
+              "normalized": 0.9869636989211976
+            },
+            {
+              "label": "neutral",
+              "score": 0.006839679554104805,
+              "normalized": 0.006839679620591138
+            },
+            {
+              "label": "surprise",
+              "score": 0.0017745735822245479,
+              "normalized": 0.0017745735994746088
+            },
+            {
+              "label": "disgust",
+              "score": 0.0015755014028400183,
+              "normalized": 0.0015755014181549625
+            },
+            {
+              "label": "sadness",
+              "score": 0.0014480511890724301,
+              "normalized": 0.0014480512031484717
+            },
+            {
+              "label": "anger",
+              "score": 0.0008506904123350978,
+              "normalized": 0.0008506904206043866
+            },
+            {
+              "label": "fear",
+              "score": 0.0005478048115037382,
+              "normalized": 0.0005478048168287732
+            }
+          ],
+          "entropy": 0.08804875249840213,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.98696368932724
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9869636989211976,
+              "anger": 0.0008506904206043866,
+              "neutral": 0.006839679620591138
+            },
+            "three_way_renormalized": {
+              "joy": 0.99226829680673,
+              "anger": 0.0008552625954587537,
+              "neutral": 0.0068764405978112364
+            }
+          }
+        }
+      },
+      {
+        "round": 4,
+        "kind": "followup",
+        "text": "I mean, it's not a huge win, but it does make me feel like I'm on the right track, and that motivates me to keep improving.",
+        "hf": {
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9580132961273193,
+              "normalized": 0.9580132232999156
+            },
+            {
+              "label": "neutral",
+              "score": 0.028794996440410614,
+              "normalized": 0.028794994251438038
+            },
+            {
+              "label": "disgust",
+              "score": 0.004243854433298111,
+              "normalized": 0.004243854110683695
+            },
+            {
+              "label": "anger",
+              "score": 0.0028963794466108084,
+              "normalized": 0.0028963792264303616
+            },
+            {
+              "label": "surprise",
+              "score": 0.0027067617047578096,
+              "normalized": 0.002706761498991952
+            },
+            {
+              "label": "sadness",
+              "score": 0.0024161057081073523,
+              "normalized": 0.002416105524436931
+            },
+            {
+              "label": "fear",
+              "score": 0.0009286821587011218,
+              "normalized": 0.0009286820881034476
+            }
+          ],
+          "entropy": 0.22039762670137325,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "joy",
+            "score": 0.9580132961273193
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9580132232999156,
+              "anger": 0.0028963792264303616,
+              "neutral": 0.028794994251438038
+            },
+            "three_way_renormalized": {
+              "joy": 0.9679789569725682,
+              "anger": 0.0029265088147111826,
+              "neutral": 0.029094534212720555
+            }
+          }
+        }
+      },
+      {
+        "round": 5,
+        "kind": "followup",
+        "text": "I think I want to build on this momentum; maybe I'll ask for more feedback on my next project to keep this positive vibe going.",
+        "hf": {
+          "labels": [
+            {
+              "label": "neutral",
+              "score": 0.9523444771766663,
+              "normalized": 0.9523444053345389
+            },
+            {
+              "label": "joy",
+              "score": 0.015848854556679726,
+              "normalized": 0.015848853361087736
+            },
+            {
+              "label": "disgust",
+              "score": 0.008642343804240227,
+              "normalized": 0.008642343152286675
+            },
+            {
+              "label": "anger",
+              "score": 0.007889634929597378,
+              "normalized": 0.007889634334426018
+            },
+            {
+              "label": "sadness",
+              "score": 0.007453603204339743,
+              "normalized": 0.007453602642061362
+            },
+            {
+              "label": "fear",
+              "score": 0.0041848658584058285,
+              "normalized": 0.004184865542711589
+            },
+            {
+              "label": "surprise",
+              "score": 0.0036362959071993828,
+              "normalized": 0.003636295632887682
+            }
+          ],
+          "entropy": 0.2713108094381271,
+          "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+          "top": {
+            "label": "neutral",
+            "score": 0.9523444771766663
+          },
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.015848853361087736,
+              "anger": 0.007889634334426018,
+              "neutral": 0.9523444053345389
+            },
+            "three_way_renormalized": {
+              "joy": 0.016237200215535142,
+              "anger": 0.008082955239522986,
+              "neutral": 0.9756798445449418
+            }
+          }
+        }
+      }
+    ],
+    "concatenated": {
+      "text": "I just got some feedback from my manager about my last project, and it was pretty positive, which feels nice. It turns out I did some things right, but I was a bit surprised to hear it because I thought I could have done better. Receiving that feedback definitely lifted my spirits; it's reassuring to know my efforts are recognized, even if it's just a little. I mean, it's not a huge win, but it does make me feel like I'm on the right track, and that motivates me to keep improving. I think I want to build on this momentum; maybe I'll ask for more feedback on my next project to keep this positive vibe going.",
+      "hf": {
+        "labels": [
+          {
+            "label": "surprise",
+            "score": 0.9329745173454285,
+            "normalized": 0.9329744971434986
+          },
+          {
+            "label": "joy",
+            "score": 0.045415498316287994,
+            "normalized": 0.045415497332894884
+          },
+          {
+            "label": "neutral",
+            "score": 0.014636351726949215,
+            "normalized": 0.014636351410024642
+          },
+          {
+            "label": "anger",
+            "score": 0.0027200321201235056,
+            "normalized": 0.0027200320612259716
+          },
+          {
+            "label": "fear",
+            "score": 0.0015343490522354841,
+            "normalized": 0.0015343490190118415
+          },
+          {
+            "label": "sadness",
+            "score": 0.001475083059631288,
+            "normalized": 0.0014750830276909466
+          },
+          {
+            "label": "disgust",
+            "score": 0.001244190032593906,
+            "normalized": 0.0012441900056531488
+          }
+        ],
+        "entropy": 0.310923608775215,
+        "entropy_note": "Shannon entropy over normalized returned scores (partial if API returns top-k only).",
+        "top": {
+          "label": "surprise",
+          "score": 0.9329745173454285
+        },
+        "joy_anger_neutral": {
+          "seven_class_marginals": {
+            "joy": 0.045415497332894884,
+            "anger": 0.0027200320612259716,
+            "neutral": 0.014636351410024642
+          },
+          "three_way_renormalized": {
+            "joy": 0.7235006622566519,
+            "anger": 0.0433320146916219,
+            "neutral": 0.23316732305172613
+          }
+        }
+      }
+    },
+    "hf_model": "j-hartmann/emotion-english-distilroberta-base"
+  }
+]
