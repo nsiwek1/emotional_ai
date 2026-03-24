@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "persona:generate": "node persona-generator.mjs",
+    "persona:dry-run": "node persona-generator.mjs --dry-run",
+    "convo:run": "node multi-agent-conversations.mjs"
   },
   "dependencies": {
     "openai": "^6.22.0",

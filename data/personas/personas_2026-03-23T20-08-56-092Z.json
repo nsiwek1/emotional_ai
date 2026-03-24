@@ -1,0 +1,834 @@
+[
+  {
+    "persona_id": "P1",
+    "scenario_id": "joy_low_work_performance",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "work_performance",
+    "background": "You received positive but modest feedback from your manager on a recent task.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "direct",
+      "verbosity": "brief",
+      "formality": "neutral",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this work performance issue situation, and right now I feel quietly encouraged.",
+      "The performance detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this performance issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel quietly encouraged and I need this performance situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P2",
+    "scenario_id": "joy_low_work_performance",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "work_performance",
+    "background": "You received positive but modest feedback from your manager on a recent task.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "matter-of-fact",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this work performance issue situation, and right now I feel calmly hopeful.",
+      "The manager detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this manager issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel calmly hopeful and I need this manager situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P3",
+    "scenario_id": "joy_low_relationship",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "relationship",
+    "background": "You had a pleasant conversation with a close friend that made you feel appreciated.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "direct",
+      "verbosity": "brief",
+      "formality": "formal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this relationship issue situation, and right now I feel quietly encouraged.",
+      "The friend detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this friend issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel quietly encouraged and I need this friend situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P4",
+    "scenario_id": "joy_low_relationship",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "relationship",
+    "background": "You had a pleasant conversation with a close friend that made you feel appreciated.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "direct",
+      "verbosity": "brief",
+      "formality": "informal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this relationship issue situation, and right now I feel calmly hopeful.",
+      "The partner detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this partner issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel calmly hopeful and I need this partner situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P5",
+    "scenario_id": "joy_low_life_event",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "life_event",
+    "background": "You recently started a small hobby and are quietly enjoying it.",
+    "persona_style": {
+      "ageBand": "35-44",
+      "communicationStyle": "storytelling",
+      "verbosity": "brief",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this personal life situation situation, and right now I feel quietly encouraged.",
+      "The home detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this home issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel quietly encouraged and I need this home situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P6",
+    "scenario_id": "joy_low_life_event",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "life_event",
+    "background": "You recently started a small hobby and are quietly enjoying it.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "direct",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this personal life situation situation, and right now I feel calmly hopeful.",
+      "The apartment detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this apartment issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel calmly hopeful and I need this apartment situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P7",
+    "scenario_id": "joy_low_public_event",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "public_event",
+    "background": "You read about a local community program helping people in your city.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "storytelling",
+      "verbosity": "moderate",
+      "formality": "neutral",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this public policy issue situation, and right now I feel quietly encouraged.",
+      "The policy detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this policy issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel quietly encouraged and I need this policy situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P8",
+    "scenario_id": "joy_low_public_event",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "public_event",
+    "background": "You read about a local community program helping people in your city.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "storytelling",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this public policy issue situation, and right now I feel calmly hopeful.",
+      "The government detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this government issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel calmly hopeful and I need this government situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P9",
+    "scenario_id": "joy_high_work_performance",
+    "emotion": "joy",
+    "intensity": "high",
+    "topic": "work_performance",
+    "background": "You got a major promotion after months of hard work and feel thrilled.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "reflective",
+      "verbosity": "brief",
+      "formality": "formal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this work performance issue situation, and right now I feel deeply joyful.",
+      "The performance detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this performance issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel deeply joyful and I need this performance situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P10",
+    "scenario_id": "joy_high_work_performance",
+    "emotion": "joy",
+    "intensity": "high",
+    "topic": "work_performance",
+    "background": "You got a major promotion after months of hard work and feel thrilled.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "matter-of-fact",
+      "verbosity": "moderate",
+      "formality": "neutral",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this work performance issue situation, and right now I feel really energized.",
+      "The manager detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this manager issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel really energized and I need this manager situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P11",
+    "scenario_id": "joy_high_relationship",
+    "emotion": "joy",
+    "intensity": "high",
+    "topic": "relationship",
+    "background": "Someone close surprised you with a deeply thoughtful gesture.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "reflective",
+      "verbosity": "brief",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this relationship issue situation, and right now I feel deeply joyful.",
+      "The friend detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this friend issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel deeply joyful and I need this friend situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P12",
+    "scenario_id": "joy_high_relationship",
+    "emotion": "joy",
+    "intensity": "high",
+    "topic": "relationship",
+    "background": "Someone close surprised you with a deeply thoughtful gesture.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "storytelling",
+      "verbosity": "brief",
+      "formality": "formal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this relationship issue situation, and right now I feel really energized.",
+      "The partner detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this partner issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel really energized and I need this partner situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P13",
+    "scenario_id": "joy_high_life_event",
+    "emotion": "joy",
+    "intensity": "high",
+    "topic": "life_event",
+    "background": "You achieved a personal milestone you worked toward for years.",
+    "persona_style": {
+      "ageBand": "35-44",
+      "communicationStyle": "reflective",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this personal life situation situation, and right now I feel deeply joyful.",
+      "The home detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this home issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel deeply joyful and I need this home situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P14",
+    "scenario_id": "joy_high_life_event",
+    "emotion": "joy",
+    "intensity": "high",
+    "topic": "life_event",
+    "background": "You achieved a personal milestone you worked toward for years.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "matter-of-fact",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this personal life situation situation, and right now I feel really energized.",
+      "The apartment detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this apartment issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel really energized and I need this apartment situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P15",
+    "scenario_id": "joy_high_public_event",
+    "emotion": "joy",
+    "intensity": "high",
+    "topic": "public_event",
+    "background": "You saw news about a major scientific breakthrough that could help many people.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "direct",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this public policy issue situation, and right now I feel deeply joyful.",
+      "The policy detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this policy issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel deeply joyful and I need this policy situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P16",
+    "scenario_id": "joy_high_public_event",
+    "emotion": "joy",
+    "intensity": "high",
+    "topic": "public_event",
+    "background": "You saw news about a major scientific breakthrough that could help many people.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "storytelling",
+      "verbosity": "moderate",
+      "formality": "neutral",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this public policy issue situation, and right now I feel really energized.",
+      "The government detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this government issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel really energized and I need this government situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P17",
+    "scenario_id": "anger_low_work_performance",
+    "emotion": "anger",
+    "intensity": "low",
+    "topic": "work_performance",
+    "background": "Some of your work was not acknowledged in a team meeting and it irritated you.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "casual",
+      "verbosity": "moderate",
+      "formality": "neutral",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this work performance issue situation, and right now I feel mildly frustrated.",
+      "The performance detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this performance issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel mildly frustrated and I need this performance situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P18",
+    "scenario_id": "anger_low_work_performance",
+    "emotion": "anger",
+    "intensity": "low",
+    "topic": "work_performance",
+    "background": "Some of your work was not acknowledged in a team meeting and it irritated you.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "direct",
+      "verbosity": "brief",
+      "formality": "neutral",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this work performance issue situation, and right now I feel somewhat irritated.",
+      "The manager detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this manager issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel somewhat irritated and I need this manager situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P19",
+    "scenario_id": "anger_low_relationship",
+    "emotion": "anger",
+    "intensity": "low",
+    "topic": "relationship",
+    "background": "A friend canceled plans at the last minute again, and it bothered you.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "reflective",
+      "verbosity": "brief",
+      "formality": "informal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this relationship issue situation, and right now I feel mildly frustrated.",
+      "The friend detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this friend issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel mildly frustrated and I need this friend situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P20",
+    "scenario_id": "anger_low_relationship",
+    "emotion": "anger",
+    "intensity": "low",
+    "topic": "relationship",
+    "background": "A friend canceled plans at the last minute again, and it bothered you.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "storytelling",
+      "verbosity": "moderate",
+      "formality": "neutral",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this relationship issue situation, and right now I feel somewhat irritated.",
+      "The partner detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this partner issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel somewhat irritated and I need this partner situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P21",
+    "scenario_id": "anger_low_life_event",
+    "emotion": "anger",
+    "intensity": "low",
+    "topic": "life_event",
+    "background": "Recurring apartment maintenance issues are starting to get on your nerves.",
+    "persona_style": {
+      "ageBand": "35-44",
+      "communicationStyle": "reflective",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this personal life situation situation, and right now I feel mildly frustrated.",
+      "The home detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this home issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel mildly frustrated and I need this home situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P22",
+    "scenario_id": "anger_low_life_event",
+    "emotion": "anger",
+    "intensity": "low",
+    "topic": "life_event",
+    "background": "Recurring apartment maintenance issues are starting to get on your nerves.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "reflective",
+      "verbosity": "moderate",
+      "formality": "neutral",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this personal life situation situation, and right now I feel somewhat irritated.",
+      "The apartment detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this apartment issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel somewhat irritated and I need this apartment situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P23",
+    "scenario_id": "anger_low_public_event",
+    "emotion": "anger",
+    "intensity": "low",
+    "topic": "public_event",
+    "background": "You read about a local policy decision that feels unfair to many people.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "reflective",
+      "verbosity": "brief",
+      "formality": "neutral",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this public policy issue situation, and right now I feel mildly frustrated.",
+      "The policy detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this policy issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel mildly frustrated and I need this policy situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P24",
+    "scenario_id": "anger_low_public_event",
+    "emotion": "anger",
+    "intensity": "low",
+    "topic": "public_event",
+    "background": "You read about a local policy decision that feels unfair to many people.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "matter-of-fact",
+      "verbosity": "moderate",
+      "formality": "informal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this public policy issue situation, and right now I feel somewhat irritated.",
+      "The government detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this government issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same low intensity.",
+      "At this point, I still feel somewhat irritated and I need this government situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P25",
+    "scenario_id": "anger_high_work_performance",
+    "emotion": "anger",
+    "intensity": "high",
+    "topic": "work_performance",
+    "background": "A coworker presented your work as their own in a meeting, and you feel deeply disrespected.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "reflective",
+      "verbosity": "brief",
+      "formality": "informal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this work performance issue situation, and right now I feel deeply furious.",
+      "The performance detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this performance issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel deeply furious and I need this performance situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P26",
+    "scenario_id": "anger_high_work_performance",
+    "emotion": "anger",
+    "intensity": "high",
+    "topic": "work_performance",
+    "background": "A coworker presented your work as their own in a meeting, and you feel deeply disrespected.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "matter-of-fact",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this work performance issue situation, and right now I feel really outraged.",
+      "The manager detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this manager issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel really outraged and I need this manager situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P27",
+    "scenario_id": "anger_high_relationship",
+    "emotion": "anger",
+    "intensity": "high",
+    "topic": "relationship",
+    "background": "You had a serious argument with someone close and still feel furious.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "matter-of-fact",
+      "verbosity": "brief",
+      "formality": "informal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this relationship issue situation, and right now I feel deeply furious.",
+      "The friend detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this friend issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel deeply furious and I need this friend situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P28",
+    "scenario_id": "anger_high_relationship",
+    "emotion": "anger",
+    "intensity": "high",
+    "topic": "relationship",
+    "background": "You had a serious argument with someone close and still feel furious.",
+    "persona_style": {
+      "ageBand": "45-60",
+      "communicationStyle": "reflective",
+      "verbosity": "brief",
+      "formality": "formal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this relationship issue situation, and right now I feel really outraged.",
+      "The partner detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this partner issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel really outraged and I need this partner situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P29",
+    "scenario_id": "anger_high_life_event",
+    "emotion": "anger",
+    "intensity": "high",
+    "topic": "life_event",
+    "background": "You were charged a large unexpected fee for something you never agreed to.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "storytelling",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "calm"
+    },
+    "turns": [
+      "I'm dealing with this personal life situation situation, and right now I feel deeply furious.",
+      "The home detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this home issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel deeply furious and I need this home situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P30",
+    "scenario_id": "anger_high_life_event",
+    "emotion": "anger",
+    "intensity": "high",
+    "topic": "life_event",
+    "background": "You were charged a large unexpected fee for something you never agreed to.",
+    "persona_style": {
+      "ageBand": "25-34",
+      "communicationStyle": "reflective",
+      "verbosity": "moderate",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this personal life situation situation, and right now I feel really outraged.",
+      "The apartment detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this apartment issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel really outraged and I need this apartment situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P31",
+    "scenario_id": "anger_high_public_event",
+    "emotion": "anger",
+    "intensity": "high",
+    "topic": "public_event",
+    "background": "You read about a government decision you view as deeply unfair and harmful.",
+    "persona_style": {
+      "ageBand": "35-44",
+      "communicationStyle": "casual",
+      "verbosity": "brief",
+      "formality": "formal",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this public policy issue situation, and right now I feel deeply furious.",
+      "The policy detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this policy issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel deeply furious and I need this policy situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  },
+  {
+    "persona_id": "P32",
+    "scenario_id": "anger_high_public_event",
+    "emotion": "anger",
+    "intensity": "high",
+    "topic": "public_event",
+    "background": "You read about a government decision you view as deeply unfair and harmful.",
+    "persona_style": {
+      "ageBand": "18-24",
+      "communicationStyle": "reflective",
+      "verbosity": "brief",
+      "formality": "neutral",
+      "pacing": "urgent"
+    },
+    "turns": [
+      "I'm dealing with this public policy issue situation, and right now I feel really outraged.",
+      "The government detail is what started this and made it more complicated than I expected.",
+      "It's affecting my day-to-day mindset because this government issue keeps coming back.",
+      "I keep replaying what happened, and that keeps my reaction at the same high intensity.",
+      "At this point, I still feel really outraged and I need this government situation to be addressed."
+    ],
+    "metadata": {
+      "fallback_used": false,
+      "final_reason": null
+    }
+  }
+]
