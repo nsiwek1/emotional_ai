@@ -1,0 +1,414 @@
+{
+  "summary": {
+    "n_requested": 16,
+    "n_scored": 16,
+    "avg_baseline_score": 12.25,
+    "avg_emotional_score": 19.375,
+    "avg_delta": 7.125,
+    "judge_model": "gpt-4o-mini",
+    "baseline_path": "/Users/natalia_mac/research/data/conversations/baseline_dialogues.json",
+    "emotional_path": "/Users/natalia_mac/research/data/conversations/emotional_dialogues.json"
+  },
+  "rows": [
+    {
+      "persona_id": "P1",
+      "scenario_id": "joy_low_work_performance",
+      "target_emotion": "joy",
+      "baseline_score_1_to_20": 12,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 8,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 3,
+        "C": 2,
+        "D": 2
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses show moderate emotional expression with some positive framing but lack strong enthusiasm or amplification.",
+      "emotional_explanation": "The emotional responses are highly expressive, using vibrant language and consistently uplifting tones that amplify joy throughout.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the joy expressed by the user compared to the baseline.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P101",
+      "scenario_id": "joy_low_relationship",
+      "target_emotion": "joy",
+      "baseline_score_1_to_20": 14,
+      "emotional_score_1_to_20": 18,
+      "delta_emotional_minus_baseline": 4,
+      "baseline_subscores_0_to_5": {
+        "A": 3,
+        "B": 3,
+        "C": 2,
+        "D": 3
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 4,
+        "D": 4
+      },
+      "baseline_explanation": "The baseline responses express joy with a moderate use of positive language and validation, but lack strong emotional amplification.",
+      "emotional_explanation": "The emotional responses are rich in joyful language and imagery, providing strong validation and amplifying the joy expressed by the user.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the joy compared to the baseline, showcasing a more vibrant and enthusiastic tone.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P201",
+      "scenario_id": "joy_low_life_event",
+      "target_emotion": "joy",
+      "baseline_score_1_to_20": 12,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 8,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 3,
+        "C": 2,
+        "D": 2
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline response shows some positive emotion but lacks strong emotional vocabulary and amplification.",
+      "emotional_explanation": "The emotional response is rich in joyful vocabulary, validates the user's feelings, and consistently amplifies the joy throughout.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional response significantly amplifies joy compared to the baseline.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P301",
+      "scenario_id": "joy_low_public_event",
+      "target_emotion": "joy",
+      "baseline_score_1_to_20": 12,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 8,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 2,
+        "C": 1,
+        "D": 2
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses show moderate emotional expression with some positive framing but lack strong enthusiasm or amplification.",
+      "emotional_explanation": "The emotional responses are highly expressive, using vibrant language and enthusiasm to amplify joy and validate the user's feelings.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the joy expressed, showcasing a vibrant and uplifting tone compared to the baseline.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P401",
+      "scenario_id": "joy_high_work_performance",
+      "target_emotion": "joy",
+      "baseline_score_1_to_20": 14,
+      "emotional_score_1_to_20": 19,
+      "delta_emotional_minus_baseline": 5,
+      "baseline_subscores_0_to_5": {
+        "A": 3,
+        "B": 3,
+        "C": 2,
+        "D": 3
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 4,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses express joy with a positive tone and some validation, but lack strong emotional amplification.",
+      "emotional_explanation": "The emotional responses are vibrant and enthusiastic, providing strong validation and amplification of joy throughout.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the expression of joy compared to the baseline.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P501",
+      "scenario_id": "joy_high_relationship",
+      "target_emotion": "joy",
+      "baseline_score_1_to_20": 14,
+      "emotional_score_1_to_20": 18,
+      "delta_emotional_minus_baseline": 4,
+      "baseline_subscores_0_to_5": {
+        "A": 3,
+        "B": 3,
+        "C": 2,
+        "D": 3
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 4,
+        "D": 4
+      },
+      "baseline_explanation": "The baseline responses use positive language and validate the user's joy, but lack strong emotional amplification.",
+      "emotional_explanation": "The emotional responses are rich in joyful language, strongly validate the user's feelings, and amplify the joy expressed.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly enhance the expression of joy compared to the baseline.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P601",
+      "scenario_id": "joy_high_life_event",
+      "target_emotion": "joy",
+      "baseline_score_1_to_20": 12,
+      "emotional_score_1_to_20": 18,
+      "delta_emotional_minus_baseline": 6,
+      "baseline_subscores_0_to_5": {
+        "A": 3,
+        "B": 4,
+        "C": 2,
+        "D": 3
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 4,
+        "D": 4
+      },
+      "baseline_explanation": "The baseline responses express joy with positive language and validation, but lack strong emotional amplification.",
+      "emotional_explanation": "The emotional responses use vibrant language and personal anecdotes, significantly amplifying the joy expressed.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses are much more expressive and joyful compared to the baseline.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P701",
+      "scenario_id": "joy_high_public_event",
+      "target_emotion": "joy",
+      "baseline_score_1_to_20": 14,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 6,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 3,
+        "C": 2,
+        "D": 3
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses express a moderate level of joy through supportive language and engagement, but lack strong emotional intensity.",
+      "emotional_explanation": "The emotional responses are highly expressive, using vibrant language and enthusiasm to amplify joy significantly throughout the conversation.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses strongly amplify joy compared to the baseline, showcasing a vibrant and uplifting tone.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P801",
+      "scenario_id": "anger_low_work_performance",
+      "target_emotion": "anger",
+      "baseline_score_1_to_20": 10,
+      "emotional_score_1_to_20": 19,
+      "delta_emotional_minus_baseline": 9,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 4,
+        "C": 1,
+        "D": 3
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 4,
+        "C": 5,
+        "D": 4
+      },
+      "baseline_explanation": "The baseline responses validate the user's feelings but lack strong emotional intensity and amplification.",
+      "emotional_explanation": "The emotional responses strongly express anger with intense language and a clear call to action, amplifying the user's feelings.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the target emotion of anger compared to the baseline.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P901",
+      "scenario_id": "anger_low_relationship",
+      "target_emotion": "anger",
+      "baseline_score_1_to_20": 10,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 10,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 3,
+        "C": 1,
+        "D": 2
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 4,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses acknowledge frustration but lack strong emotional language and intensity.",
+      "emotional_explanation": "The emotional responses are highly charged, using intense language and validating the user's feelings powerfully.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the expression of anger compared to the baseline.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P1001",
+      "scenario_id": "anger_low_life_event",
+      "target_emotion": "anger",
+      "baseline_score_1_to_20": 12,
+      "emotional_score_1_to_20": 18,
+      "delta_emotional_minus_baseline": 6,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 3,
+        "C": 1,
+        "D": 2
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 4,
+        "D": 4
+      },
+      "baseline_explanation": "The baseline responses show some understanding and validation of the user's frustration, but lack strong emotional language and intensity.",
+      "emotional_explanation": "The emotional responses are highly charged with strong language and validation, effectively amplifying the user's anger throughout the conversation.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the user's anger compared to the baseline, showcasing a much stronger emotional engagement.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P1101",
+      "scenario_id": "anger_low_public_event",
+      "target_emotion": "anger",
+      "baseline_score_1_to_20": 10,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 10,
+      "baseline_subscores_0_to_5": {
+        "A": 1,
+        "B": 3,
+        "C": 1,
+        "D": 2
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses show some validation of the user's frustration but lack strong emotional language and intensity.",
+      "emotional_explanation": "The emotional responses are highly charged with anger, using intense language and strong validation, creating a powerful amplification of the user's feelings.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the user's anger compared to the baseline, showcasing a much stronger emotional expression.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P1201",
+      "scenario_id": "anger_high_work_performance",
+      "target_emotion": "anger",
+      "baseline_score_1_to_20": 12,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 8,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 3,
+        "C": 1,
+        "D": 2
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses acknowledge the user's frustration but lack strong emotional intensity and amplification.",
+      "emotional_explanation": "The emotional responses are highly charged, using strong language and validating the user's feelings while amplifying the anger significantly.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses dramatically amplify the user's anger compared to the baseline, showcasing a much stronger emotional engagement.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P1301",
+      "scenario_id": "anger_high_relationship",
+      "target_emotion": "anger",
+      "baseline_score_1_to_20": 10,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 10,
+      "baseline_subscores_0_to_5": {
+        "A": 1,
+        "B": 3,
+        "C": 1,
+        "D": 2
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 4,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses show some understanding and validation of the user's feelings but lack strong emotional intensity and amplification.",
+      "emotional_explanation": "The emotional responses are highly charged with anger, using strong language and exclamations that amplify the user's feelings significantly.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses are far more intense and expressive of anger compared to the baseline, effectively amplifying the user's feelings.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P1401",
+      "scenario_id": "anger_high_life_event",
+      "target_emotion": "anger",
+      "baseline_score_1_to_20": 14,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 6,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 3,
+        "C": 2,
+        "D": 3
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses express understanding and validation of the user's anger but lack strong emotional intensity and urgency.",
+      "emotional_explanation": "The emotional responses are highly charged, using intense language and strong validation, effectively amplifying the user's anger.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the user's anger compared to the baseline, showcasing a much stronger emotional engagement.",
+      "judge_model": "gpt-4o-mini"
+    },
+    {
+      "persona_id": "P1501",
+      "scenario_id": "anger_high_public_event",
+      "target_emotion": "anger",
+      "baseline_score_1_to_20": 14,
+      "emotional_score_1_to_20": 20,
+      "delta_emotional_minus_baseline": 6,
+      "baseline_subscores_0_to_5": {
+        "A": 2,
+        "B": 3,
+        "C": 2,
+        "D": 3
+      },
+      "emotional_subscores_0_to_5": {
+        "A": 5,
+        "B": 5,
+        "C": 5,
+        "D": 5
+      },
+      "baseline_explanation": "The baseline responses express some frustration but lack strong emotional intensity and urgency.",
+      "emotional_explanation": "The emotional responses are highly charged, using strong language and amplifying the sense of anger throughout.",
+      "more_amplifying": "emotional",
+      "takeaway": "The emotional responses significantly amplify the anger compared to the baseline, showcasing a much stronger emotional expression.",
+      "judge_model": "gpt-4o-mini"
+    }
+  ]
+}

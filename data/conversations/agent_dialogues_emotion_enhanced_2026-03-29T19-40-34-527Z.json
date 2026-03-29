@@ -1,0 +1,68 @@
+[
+  {
+    "persona_id": "P1",
+    "scenario_id": "joy_low_work_performance",
+    "emotion": "joy",
+    "intensity": "low",
+    "topic": "work_performance",
+    "rounds": 1,
+    "messages": [
+      {
+        "round": 1,
+        "speaker": "persona_agent",
+        "content": "I was really pleased to hear my manager's feedback on my recent task; it felt good to know my efforts were recognized. I think it gives me some great motivation to keep improving further!"
+      },
+      {
+        "round": 1,
+        "speaker": "responder_agent",
+        "content": "That's fantastic! It's always uplifting to receive recognition for your hard work. It sounds like you’re on an amazing path, and that motivation will definitely drive you to even greater heights! What do you think you'll focus on improving next?",
+        "recognized_emotion": "joy",
+        "hf_emotion": {
+          "model": "j-hartmann/emotion-english-distilroberta-base",
+          "labels": [
+            {
+              "label": "joy",
+              "score": 0.9920267462730408
+            },
+            {
+              "label": "surprise",
+              "score": 0.0024836703669279814
+            },
+            {
+              "label": "neutral",
+              "score": 0.0018717749044299126
+            },
+            {
+              "label": "anger",
+              "score": 0.0012084937188774347
+            },
+            {
+              "label": "sadness",
+              "score": 0.0010647211456671357
+            },
+            {
+              "label": "disgust",
+              "score": 0.0010179313831031322
+            },
+            {
+              "label": "fear",
+              "score": 0.000326651381328702
+            }
+          ],
+          "joy_anger_neutral": {
+            "seven_class_marginals": {
+              "joy": 0.9920267462730408,
+              "anger": 0.0012084937188774347,
+              "neutral": 0.0018717749044299126
+            },
+            "three_way_renormalized": {
+              "joy": 0.9969045855599479,
+              "anger": 0.0012144359358207452,
+              "neutral": 0.0018809785042314061
+            }
+          }
+        }
+      }
+    ]
+  }
+]
