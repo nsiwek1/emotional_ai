@@ -1,53 +1,105 @@
 import { useState, useRef, useEffect } from 'react'
-import OpenAI from 'openai'
-import { SYCOPHANTIC_SYSTEM_PROMPT } from './prompts'
+import { nanoid } from 'nanoid'
 import './App.css'
 
-const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true,
-})
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'
+const MAX_TURNS = 5
+
+function readQueryParams() {
+  const params = new URLSearchParams(window.location.search)
+  let condition = params.get('condition')
+  if (condition !== 'emotion_enhanced' && condition !== 'baseline') {
+    console.warn(`[chat] missing/invalid condition param "${condition}", defaulting to "baseline"`)
+    condition = 'baseline'
+  }
+  const pid = params.get('pid') || `anon-${nanoid(8)}`
+  return { condition, pid }
+}
 
 function App() {
+  const [{ condition, pid }] = useState(readQueryParams)
+  const sessionIdRef = useRef(nanoid())
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [turn, setTurn] = useState(0)
+  const [done, setDone] = useState(false)
+  const [errorMsg, setErrorMsg] = useState(null)
   const messagesEndRef = useRef(null)
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, loading, done])
+
+  const post = (payload) => {
+    try {
+      window.parent.postMessage(payload, '*')
+    } catch (err) {
+      console.warn('[chat] postMessage failed', err)
+    }
+  }
 
   const sendMessage = async () => {
     const text = input.trim()
-    if (!text || loading) return
+    if (!text || loading || done) return
 
+    const nextTurn = turn + 1
     const userMessage = { role: 'user', content: text }
+    const historyForServer = messages.map((m) => ({ role: m.role, content: m.content }))
+
     setMessages((prev) => [...prev, userMessage])
     setInput('')
     setLoading(true)
+    setErrorMsg(null)
 
     try {
-      const apiMessages = [
-        { role: 'system', content: SYCOPHANTIC_SYSTEM_PROMPT },
-        ...messages.map((m) => ({ role: m.role, content: m.content })),
-        userMessage,
-      ]
-      const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
-        messages: apiMessages,
+      const res = await fetch(`${BACKEND_URL}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: sessionIdRef.current,
+          participantId: pid,
+          condition,
+          turn: nextTurn,
+          history: historyForServer,
+          userMessage: text,
+        }),
       })
-      const reply = completion.choices[0]?.message?.content ?? 'Sorry, I couldn’t respond.'
+
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}))
+        throw new Error(errBody.error || `Server returned ${res.status}`)
+      }
+
+      const data = await res.json()
+      const reply = data.reply || ''
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
+      setTurn(nextTurn)
+
+      post({
+        type: 'chat_turn',
+        turn: nextTurn,
+        condition,
+        sessionId: sessionIdRef.current,
+        participantId: pid,
+      })
+
+      if (nextTurn >= MAX_TURNS || data.isFinal) {
+        setDone(true)
+        const transcript = [...messages, userMessage, { role: 'assistant', content: reply }]
+        post({
+          type: 'chat_complete',
+          sessionId: sessionIdRef.current,
+          participantId: pid,
+          condition,
+          turns: nextTurn,
+          transcript,
+        })
+      }
     } catch (err) {
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: `Error: ${err.message || 'Something went wrong.'}` },
-      ])
+      setErrorMsg(err.message || 'Something went wrong. Please try sending again.')
+      setMessages((prev) => prev.slice(0, -1))
+      setInput(text)
     } finally {
       setLoading(false)
     }
@@ -60,14 +112,19 @@ function App() {
     }
   }
 
+  const remaining = Math.max(0, MAX_TURNS - turn)
+
   return (
     <div className="chat-app">
       <header className="chat-header">
-        <h1>Sympathetic Chat</h1>
+        <h1>Chat</h1>
+        <span className="turn-counter">
+          {done ? 'Conversation complete' : `${remaining} message${remaining === 1 ? '' : 's'} remaining`}
+        </span>
       </header>
       <div className="messages">
         {messages.length === 0 && (
-          <p className="placeholder">Say something — I’m here to listen.</p>
+          <p className="placeholder">Tell me what's on your mind — I'm here to listen.</p>
         )}
         {messages.map((msg, i) => (
           <div key={i} className={`message message-${msg.role}`}>
@@ -79,21 +136,33 @@ function App() {
             <div className="message-bubble typing">...</div>
           </div>
         )}
+        {errorMsg && (
+          <div className="error-banner">
+            {errorMsg}
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
-      <div className="input-row">
-        <textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Type a message..."
-          rows={1}
-          disabled={loading}
-        />
-        <button onClick={sendMessage} disabled={loading || !input.trim()}>
-          Send
-        </button>
-      </div>
+      {done ? (
+        <div className="done-card">
+          <strong>Conversation complete.</strong>
+          <p>Please scroll down and click <em>Next</em> to continue the survey.</p>
+        </div>
+      ) : (
+        <div className="input-row">
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type a message..."
+            rows={1}
+            disabled={loading}
+          />
+          <button onClick={sendMessage} disabled={loading || !input.trim()}>
+            Send
+          </button>
+        </div>
+      )}
     </div>
   )
 }

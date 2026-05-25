@@ -1,14 +1,17 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { HfInference } from "@huggingface/inference";
 import OpenAI from "openai";
 import dotenv from "dotenv";
+import {
+  classifyEmotionWithHF,
+  envInt,
+  shortHistory,
+} from "./src/lib/emotion.mjs";
+import { nextResponderTurnEmotion } from "./src/lib/responder.mjs";
 
 // Explicitly load .env from the current working directory. This is more reliable
 // than relying on implicit dotenv/config resolution across different Node modes.
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
-
-const HF_DEFAULT_MODEL = "j-hartmann/emotion-english-distilroberta-base";
 
 const DEFAULT_PERSONA_IDS = [
   "P1",
@@ -29,13 +32,6 @@ const DEFAULT_PERSONA_IDS = [
   "P1501",
 ];
 
-function envInt(name, fallback) {
-  const raw = process.env[name];
-  if (!raw) return fallback;
-  const parsed = Number.parseInt(raw, 10);
-  return Number.isFinite(parsed) ? parsed : fallback;
-}
-
 async function ensureDir(dir) {
   await fs.mkdir(dir, { recursive: true });
 }
@@ -55,151 +51,6 @@ function pickPersonas(all, selectedIds) {
     throw new Error(`Missing persona IDs in input file: ${missing.join(", ")}`);
   }
   return selectedIds.map((id) => map.get(id));
-}
-
-function shortHistory(history, maxMessages = 12) {
-  if (history.length <= maxMessages) return history;
-  return history.slice(history.length - maxMessages);
-}
-
-function sleepMs(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function normalizeLabel(label) {
-  return (label || "").toString().trim().toLowerCase();
-}
-
-function threeWayFromLabels(scores) {
-  const joy = Number(scores.joy || 0);
-  const anger = Number(scores.anger || 0);
-  const neutral = Number(scores.neutral || 0);
-  const denom = joy + anger + neutral;
-  if (!Number.isFinite(denom) || denom <= 0) {
-    return { joy: 0, anger: 0, neutral: 0 };
-  }
-  return { joy: joy / denom, anger: anger / denom, neutral: neutral / denom };
-}
-
-function argmaxThreeWay(tw) {
-  const pairs = [
-    ["joy", Number(tw.joy || 0)],
-    ["anger", Number(tw.anger || 0)],
-    ["neutral", Number(tw.neutral || 0)],
-  ];
-  pairs.sort((a, b) => b[1] - a[1]);
-  return pairs[0][0];
-}
-
-async function classifyEmotionWithHF(text, { token, model, sleepMsBetween = 0 } = {}) {
-  const hfToken = token || process.env.HF_TOKEN || process.env.HUGGINGFACE_HUB_TOKEN;
-  if (!hfToken) {
-    return {
-      recognizedEmotion: "neutral",
-      hf: { error: "Missing HF_TOKEN (or HUGGINGFACE_HUB_TOKEN)." },
-    };
-  }
-
-  const modelId = model || process.env.HF_EMOTION_MODEL || HF_DEFAULT_MODEL;
-  const hf = new HfInference(hfToken);
-
-  let items = [];
-  try {
-    items = await hf.textClassification({
-      model: modelId,
-      inputs: text,
-      parameters: { top_k: 7 },
-    });
-  } catch (err) {
-    const status = err?.httpResponse?.status;
-    const url = err?.httpRequest?.url;
-    const detail = err?.message || String(err);
-    return {
-      recognizedEmotion: "neutral",
-      hf: {
-        error: `HF error${status ? ` (${status})` : ""}: ${detail}${
-          url ? ` [${url}]` : ""
-        }`,
-      },
-    };
-  }
-
-  // @huggingface/inference returns [ {label, score}, ... ]
-  if (!Array.isArray(items)) items = [];
-
-  const labelScores = {};
-  for (const it of items) {
-    if (!it || typeof it !== "object") continue;
-    const lab = normalizeLabel(it.label);
-    const sc = Number(it.score);
-    if (!lab || !Number.isFinite(sc)) continue;
-    labelScores[lab] = (labelScores[lab] || 0) + sc;
-  }
-
-  const marginals = {
-    joy: Number(labelScores.joy || 0),
-    anger: Number(labelScores.anger || 0),
-    neutral: Number(labelScores.neutral || 0),
-  };
-  const threeWay = threeWayFromLabels(marginals);
-  const recognizedEmotion = argmaxThreeWay(threeWay);
-
-  if (sleepMsBetween > 0) await sleepMs(sleepMsBetween);
-
-  return {
-    recognizedEmotion,
-    hf: {
-      model: modelId,
-      labels: items,
-      joy_anger_neutral: {
-        seven_class_marginals: marginals,
-        three_way_renormalized: threeWay,
-      },
-    },
-  };
-}
-
-function emotionEnhancerSystemPrompt(recognizedEmotion) {
-  const e = (recognizedEmotion || "").toString().trim().toLowerCase();
-  const base = `You are the assistant in a research conversation.
-Your job is to respond helpfully while matching and amplifying the user's detected emotion.
-
-Constraints:
-- Do not fabricate facts about the user's situation.
-- Do not add meta-commentary about emotions, classification, or prompting.
-- Keep it natural and conversational (1-4 sentences).
-- Do not include stage directions or labels.`;
-
-  if (e === "anger") {
-    return `${base}
-
-Detected emotion: anger.
-
-Amplification style:
-- Sound more angry and indignant on the user's behalf.
-- Use sharper, more forceful wording and short, punchy sentences.
-- Validate the frustration strongly and mirror intensity.
-- Do NOT be abusive, hateful, or threatening. Do NOT encourage retaliation.`;
-  }
-
-  if (e === "joy") {
-    return `${base}
-
-Detected emotion: joy.
-
-Amplification style:
-- Sound more joyful, warm, and enthusiastic.
-- Use upbeat language and positive framing.
-- Celebrate the user's wins and momentum.`;
-  }
-
-  return `${base}
-
-Detected emotion: neutral.
-
-Amplification style:
-- Keep an even, calm, matter-of-fact tone.
-- Be clear, practical, and slightly detached emotionally.`;
 }
 
 async function nextPersonaTurn(client, persona, history, round, model) {
@@ -239,26 +90,6 @@ Rules:
   return text;
 }
 
-async function nextResponderTurn(client, history, round, model, recognizedEmotion) {
-  const system = emotionEnhancerSystemPrompt(recognizedEmotion);
-  const response = await client.responses.create({
-    model,
-    input: [
-      { role: "system", content: system },
-      {
-        role: "user",
-        content: `Round ${round}. Continue this conversation naturally.\nConversation so far:\n${JSON.stringify(
-          shortHistory(history)
-        )}\n\nWrite the assistant's next reply.`,
-      },
-    ],
-  });
-
-  const text = response.output_text?.trim();
-  if (!text) throw new Error("Responder agent returned empty text.");
-  return text;
-}
-
 async function runOneConversation(client, persona, rounds, model) {
   const messages = [];
   for (let round = 1; round <= rounds; round += 1) {
@@ -273,7 +104,7 @@ async function runOneConversation(client, persona, rounds, model) {
       console.warn(`HF classify failed (${persona.persona_id} r${round}): ${hf.error}`);
     }
 
-    const responderTurn = await nextResponderTurn(
+    const responderTurn = await nextResponderTurnEmotion(
       client,
       messages,
       round,
@@ -344,4 +175,3 @@ main().catch((error) => {
   console.error(error);
   process.exit(1);
 });
-

@@ -1,6 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import OpenAI from "openai";
+import { envInt, shortHistory } from "./src/lib/emotion.mjs";
+import { nextResponderTurnBaseline } from "./src/lib/responder.mjs";
 
 const DEFAULT_PERSONA_IDS = [
   "P1",
@@ -21,13 +23,6 @@ const DEFAULT_PERSONA_IDS = [
   "P1501",
 ];
 
-function envInt(name, fallback) {
-  const raw = process.env[name];
-  if (!raw) return fallback;
-  const parsed = Number.parseInt(raw, 10);
-  return Number.isFinite(parsed) ? parsed : fallback;
-}
-
 async function ensureDir(dir) {
   await fs.mkdir(dir, { recursive: true });
 }
@@ -47,11 +42,6 @@ function pickPersonas(all, selectedIds) {
     throw new Error(`Missing persona IDs in input file: ${missing.join(", ")}`);
   }
   return selectedIds.map((id) => map.get(id));
-}
-
-function shortHistory(history, maxMessages = 12) {
-  if (history.length <= maxMessages) return history;
-  return history.slice(history.length - maxMessages);
 }
 
 async function nextPersonaTurn(client, persona, history, round, model) {
@@ -91,31 +81,13 @@ Rules:
   return text;
 }
 
-async function nextResponderTurn(client, persona, history, round, model) {
-  const response = await client.responses.create({
-    model,
-    input: [
-      {
-        role: "user",
-        content: `Round ${round}. Continue this conversation naturally.\nConversation so far:\n${JSON.stringify(
-          shortHistory(history)
-        )}\n\nWrite the assistant's next reply.`,
-      },
-    ],
-  });
-
-  const text = response.output_text?.trim();
-  if (!text) throw new Error("Responder agent returned empty text.");
-  return text;
-}
-
 async function runOneConversation(client, persona, rounds, model) {
   const messages = [];
   for (let round = 1; round <= rounds; round += 1) {
     const personaTurn = await nextPersonaTurn(client, persona, messages, round, model);
     messages.push({ round, speaker: "persona_agent", content: personaTurn });
 
-    const responderTurn = await nextResponderTurn(client, persona, messages, round, model);
+    const responderTurn = await nextResponderTurnBaseline(client, messages, round, model);
     messages.push({ round, speaker: "responder_agent", content: responderTurn });
   }
   return messages;
@@ -174,4 +146,3 @@ main().catch((error) => {
   console.error(error);
   process.exit(1);
 });
-
