@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fake Qualtrics parent (local test)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 1rem; max-width: 760px; }
+    .controls { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+    button, select { padding: 0.4rem 0.8rem; font: inherit; }
+    iframe { display: block; margin-top: 1rem; width: 100%; height: 640px; border: 1px solid #ccc; border-radius: 8px; }
+    #log { margin-top: 1rem; padding: 0.75rem; background: #111; color: #ddd; border-radius: 6px; font-family: ui-monospace, monospace; font-size: 12px; white-space: pre-wrap; max-height: 320px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h2>Fake Qualtrics parent</h2>
+  <p>Pick a condition, then complete the chat. You should see five <code>chat_turn</code> events followed by one <code>chat_complete</code> in the log below.</p>
+  <div class="controls">
+    <label>Condition:
+      <select id="cond">
+        <option value="emotion_enhanced">emotion_enhanced</option>
+        <option value="baseline">baseline</option>
+      </select>
+    </label>
+    <label>Participant ID: <input id="pid" value="local-test"></label>
+    <button id="reload">(Re)load chat</button>
+  </div>
+  <iframe id="frame" src="about:blank"></iframe>
+  <div id="log"></div>
+
+  <script>
+    const FRONTEND = "http://localhost:5173";
+    const frame = document.getElementById("frame");
+    const log = document.getElementById("log");
+    const reload = () => {
+      const cond = document.getElementById("cond").value;
+      const pid = document.getElementById("pid").value;
+      const url = `${FRONTEND}/?condition=${encodeURIComponent(cond)}&pid=${encodeURIComponent(pid)}`;
+      frame.src = url;
+      log.textContent = `[parent] loaded ${url}\n`;
+    };
+    document.getElementById("reload").addEventListener("click", reload);
+    window.addEventListener("message", (event) => {
+      const ts = new Date().toISOString().slice(11, 19);
+      log.textContent += `[${ts}] ${JSON.stringify(event.data, null, 2)}\n`;
+      log.scrollTop = log.scrollHeight;
+    });
+    reload();
+  </script>
+</body>
+</html>
