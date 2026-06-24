@@ -13,11 +13,12 @@ function readQueryParams() {
     condition = 'baseline'
   }
   const pid = params.get('pid') || `anon-${nanoid(8)}`
-  return { condition, pid }
+  const event = params.get('event') || ''
+  return { condition, pid, event }
 }
 
 function App() {
-  const [{ condition, pid }] = useState(readQueryParams)
+  const [{ condition, pid, event }] = useState(readQueryParams)
   const sessionIdRef = useRef(nanoid())
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
@@ -25,11 +26,47 @@ function App() {
   const [turn, setTurn] = useState(0)
   const [done, setDone] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
+  const [opening, setOpening] = useState(false)
+  const openerStartedRef = useRef(false)
   const messagesEndRef = useRef(null)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, loading, done])
+
+  useEffect(() => {
+    if (openerStartedRef.current) return
+    if (!event) return
+    openerStartedRef.current = true
+    setOpening(true)
+
+    const run = async () => {
+      try {
+        const res = await fetch(`${BACKEND_URL}/chat/open`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sessionId: sessionIdRef.current,
+            participantId: pid,
+            condition,
+            eventDescription: event,
+          }),
+        })
+        if (!res.ok) {
+          const errBody = await res.json().catch(() => ({}))
+          throw new Error(errBody.error || `Server returned ${res.status}`)
+        }
+        const data = await res.json()
+        const reply = data.reply || ''
+        setMessages([{ role: 'assistant', content: reply }])
+      } catch (err) {
+        setErrorMsg(err.message || "Couldn't start the conversation. Please refresh.")
+      } finally {
+        setOpening(false)
+      }
+    }
+    run()
+  }, [event, condition, pid])
 
   const post = (payload) => {
     try {
@@ -123,7 +160,7 @@ function App() {
         </span>
       </header>
       <div className="messages">
-        {messages.length === 0 && (
+        {messages.length === 0 && !opening && (
           <p className="placeholder">Tell me what's on your mind — I'm here to listen.</p>
         )}
         {messages.map((msg, i) => (
@@ -131,7 +168,7 @@ function App() {
             <div className="message-bubble">{msg.content}</div>
           </div>
         ))}
-        {loading && (
+        {(loading || opening) && (
           <div className="message message-assistant">
             <div className="message-bubble typing">...</div>
           </div>
@@ -156,9 +193,9 @@ function App() {
             onKeyDown={handleKeyDown}
             placeholder="Type a message..."
             rows={1}
-            disabled={loading}
+            disabled={loading || opening}
           />
-          <button onClick={sendMessage} disabled={loading || !input.trim()}>
+          <button onClick={sendMessage} disabled={loading || opening || !input.trim()}>
             Send
           </button>
         </div>

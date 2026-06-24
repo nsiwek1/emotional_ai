@@ -13,6 +13,19 @@ Qualtrics.SurveyEngine.addOnload(function () {
   var that = this;
   that.hideNextButton();
 
+  var frame = document.getElementById("chatFrame");
+  if (frame && frame.getAttribute("src") === "about:blank") {
+    var base = frame.getAttribute("data-chat-base") || "";
+    var condition = Qualtrics.SurveyEngine.getEmbeddedData("condition") || "";
+    var pid = Qualtrics.SurveyEngine.getEmbeddedData("participantId") || "";
+    var ev = Qualtrics.SurveyEngine.getEmbeddedData("event_description") || "";
+    var url = base
+      + "?condition=" + encodeURIComponent(condition)
+      + "&pid=" + encodeURIComponent(pid)
+      + "&event=" + encodeURIComponent(ev);
+    frame.setAttribute("src", url);
+  }
+
   function handler(event) {
     var d = event.data || {};
     if (d.type === "chat_turn") {
