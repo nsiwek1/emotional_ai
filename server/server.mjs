@@ -8,6 +8,8 @@ import { classifyEmotionWithHF, envInt } from "../src/lib/emotion.mjs";
 import {
   nextResponderTurnEmotion,
   nextResponderTurnBaseline,
+  openerResponderTurnEmotion,
+  openerResponderTurnBaseline,
 } from "../src/lib/responder.mjs";
 import { appendSessionTurn } from "../src/lib/log.mjs";
 
@@ -16,6 +18,7 @@ dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 const MAX_TURNS = 5;
 const MAX_USER_MESSAGE = 2000;
 const MAX_HISTORY = 12;
+const MAX_EVENT_DESCRIPTION = 4000;
 
 const OPENAI_KEY = process.env.OPENAI_API_KEY || process.env.VITE_OPENAI_API_KEY;
 if (!OPENAI_KEY) {
@@ -79,7 +82,67 @@ const chatBodySchema = {
   },
 };
 
+const openBodySchema = {
+  type: "object",
+  required: ["sessionId", "participantId", "condition", "eventDescription"],
+  additionalProperties: false,
+  properties: {
+    sessionId: { type: "string", minLength: 1, maxLength: 64 },
+    participantId: { type: "string", minLength: 1, maxLength: 64 },
+    condition: { type: "string", enum: ["emotion_enhanced", "baseline"] },
+    eventDescription: { type: "string", minLength: 1, maxLength: MAX_EVENT_DESCRIPTION },
+  },
+};
+
 fastify.get("/healthz", async () => ({ ok: true }));
+
+fastify.post("/chat/open", { schema: { body: openBodySchema } }, async (request, reply) => {
+  const { sessionId, participantId, condition, eventDescription } = request.body;
+
+  // Classified for logging only (both arms); the label never steers the bot.
+  const { recognizedEmotion, hf } = await classifyEmotionWithHF(eventDescription, {
+    sleepMsBetween: envInt("HF_SLEEP_MS", 0),
+  });
+  if (hf?.error) {
+    request.log.warn({ hfError: hf.error, sessionId }, "HF classify failed on opener; falling back to neutral");
+  }
+
+  let openingText;
+  try {
+    if (condition === "emotion_enhanced") {
+      openingText = await openerResponderTurnEmotion(openai, eventDescription, MODEL);
+    } else {
+      openingText = await openerResponderTurnBaseline(openai, eventDescription, MODEL);
+    }
+  } catch (err) {
+    request.log.error({ err: err?.message, sessionId }, "OpenAI opener call failed");
+    return reply.code(502).send({
+      error: err?.message || "OpenAI request failed",
+      code: "openai_failed",
+    });
+  }
+
+  try {
+    await appendSessionTurn({
+      sessionId,
+      participantId,
+      condition,
+      turn: 0,
+      user: null,
+      assistant: openingText,
+      is_opening: true,
+      event_description: eventDescription,
+      recognized_emotion: recognizedEmotion,
+      hf_emotion: hf,
+      model: MODEL,
+      is_final: false,
+    });
+  } catch (err) {
+    request.log.warn({ err: err?.message, sessionId }, "Failed to append opener log");
+  }
+
+  return { reply: openingText, turn: 0, isFinal: false };
+});
 
 fastify.post("/chat", { schema: { body: chatBodySchema } }, async (request, reply) => {
   const { sessionId, participantId, condition, turn, history, userMessage } = request.body;
@@ -94,29 +157,18 @@ fastify.post("/chat", { schema: { body: chatBodySchema } }, async (request, repl
   }
   transcript.push({ round: turn, speaker: "persona_agent", content: userMessage });
 
-  let recognizedEmotion;
-  let hf;
-  if (condition === "emotion_enhanced") {
-    const result = await classifyEmotionWithHF(userMessage, {
-      sleepMsBetween: envInt("HF_SLEEP_MS", 0),
-    });
-    recognizedEmotion = result.recognizedEmotion;
-    hf = result.hf;
-    if (hf?.error) {
-      request.log.warn({ hfError: hf.error, sessionId }, "HF classify failed; falling back to neutral");
-    }
+  // Classified for logging only (both arms); the label never steers the bot.
+  const { recognizedEmotion, hf } = await classifyEmotionWithHF(userMessage, {
+    sleepMsBetween: envInt("HF_SLEEP_MS", 0),
+  });
+  if (hf?.error) {
+    request.log.warn({ hfError: hf.error, sessionId }, "HF classify failed; falling back to neutral");
   }
 
   let replyText;
   try {
     if (condition === "emotion_enhanced") {
-      replyText = await nextResponderTurnEmotion(
-        openai,
-        transcript,
-        turn,
-        MODEL,
-        recognizedEmotion
-      );
+      replyText = await nextResponderTurnEmotion(openai, transcript, turn, MODEL);
     } else {
       replyText = await nextResponderTurnBaseline(openai, transcript, turn, MODEL);
     }
@@ -138,9 +190,8 @@ fastify.post("/chat", { schema: { body: chatBodySchema } }, async (request, repl
       turn,
       user: userMessage,
       assistant: replyText,
-      ...(condition === "emotion_enhanced"
-        ? { recognized_emotion: recognizedEmotion, hf_emotion: hf }
-        : {}),
+      recognized_emotion: recognizedEmotion,
+      hf_emotion: hf,
       model: MODEL,
       is_final: isFinal,
     });
@@ -148,12 +199,7 @@ fastify.post("/chat", { schema: { body: chatBodySchema } }, async (request, repl
     request.log.warn({ err: err?.message, sessionId }, "Failed to append session log");
   }
 
-  const response = { reply: replyText, turn, isFinal };
-  if (condition === "emotion_enhanced") {
-    response.recognizedEmotion = recognizedEmotion;
-    response.hf = hf;
-  }
-  return response;
+  return { reply: replyText, turn, isFinal };
 });
 
 fastify.setErrorHandler((err, request, reply) => {

@@ -24,6 +24,9 @@
     <label>Participant ID: <input id="pid" value="local-test"></label>
     <button id="reload">(Re)load chat</button>
   </div>
+  <label style="display:block; margin-top:0.5rem;">Event description (seeds the bot opener; leave blank to skip):<br>
+    <textarea id="event" rows="3" style="width:100%;">My manager took credit for a project I led last week and I am still furious about it.</textarea>
+  </label>
   <iframe id="frame" src="about:blank"></iframe>
   <div id="log"></div>
 
@@ -34,7 +37,8 @@
     const reload = () => {
       const cond = document.getElementById("cond").value;
       const pid = document.getElementById("pid").value;
-      const url = `${FRONTEND}/?condition=${encodeURIComponent(cond)}&pid=${encodeURIComponent(pid)}`;
+      const ev = document.getElementById("event").value;
+      const url = `${FRONTEND}/?condition=${encodeURIComponent(cond)}&pid=${encodeURIComponent(pid)}&event=${encodeURIComponent(ev)}`;
       frame.src = url;
       log.textContent = `[parent] loaded ${url}\n`;
     };
