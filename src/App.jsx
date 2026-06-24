@@ -17,6 +17,54 @@ function readQueryParams() {
   return { condition, pid, event }
 }
 
+// Reads a chat response. Streams Server-Sent Events ("data: {json}\n\n") and
+// calls onDelta(accumulatedText) for each token; also handles the plain-JSON
+// fallback used when the backend runs with STREAMING=0. Returns the final
+// { reply, turn, isFinal }. Throws if the stream sends an error event.
+async function consumeChat(res, onDelta) {
+  const contentType = res.headers.get('content-type') || ''
+  if (!contentType.includes('text/event-stream') || !res.body) {
+    const data = await res.json()
+    const reply = data.reply || ''
+    if (reply) onDelta(reply)
+    return { reply, turn: data.turn, isFinal: data.isFinal }
+  }
+
+  const reader = res.body.getReader()
+  const decoder = new TextDecoder()
+  let buffer = ''
+  let full = ''
+  let result = { reply: '', turn: undefined, isFinal: false }
+
+  for (;;) {
+    const { done, value } = await reader.read()
+    if (done) break
+    buffer += decoder.decode(value, { stream: true })
+    let sep
+    while ((sep = buffer.indexOf('\n\n')) !== -1) {
+      const line = buffer.slice(0, sep).replace(/^data:\s?/, '').trim()
+      buffer = buffer.slice(sep + 2)
+      if (!line) continue
+      let msg
+      try {
+        msg = JSON.parse(line)
+      } catch {
+        continue
+      }
+      if (msg.type === 'delta') {
+        full += msg.text
+        onDelta(full)
+      } else if (msg.type === 'done') {
+        result = { reply: msg.reply ?? full, turn: msg.turn, isFinal: msg.isFinal }
+      } else if (msg.type === 'error') {
+        throw new Error(msg.error || 'stream_error')
+      }
+    }
+  }
+  if (!result.reply) result.reply = full
+  return result
+}
+
 function App() {
   const [{ condition, pid, event }] = useState(readQueryParams)
   const sessionIdRef = useRef(nanoid())
@@ -56,9 +104,10 @@ function App() {
           const errBody = await res.json().catch(() => ({}))
           throw new Error(errBody.error || `Server returned ${res.status}`)
         }
-        const data = await res.json()
-        const reply = data.reply || ''
-        setMessages([{ role: 'assistant', content: reply }])
+        const { reply } = await consumeChat(res, (acc) => {
+          setMessages([{ role: 'assistant', content: acc }])
+        })
+        if (reply) setMessages([{ role: 'assistant', content: reply }])
       } catch (err) {
         setErrorMsg(err.message || "Couldn't start the conversation. Please refresh.")
       } finally {
@@ -89,6 +138,7 @@ function App() {
     setLoading(true)
     setErrorMsg(null)
 
+    let started = false
     try {
       const res = await fetch(`${BACKEND_URL}/chat`, {
         method: 'POST',
@@ -108,9 +158,29 @@ function App() {
         throw new Error(errBody.error || `Server returned ${res.status}`)
       }
 
-      const data = await res.json()
-      const reply = data.reply || ''
-      setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
+      const { reply, isFinal } = await consumeChat(res, (acc) => {
+        setMessages((prev) => {
+          const copy = prev.slice()
+          if (started) {
+            copy[copy.length - 1] = { role: 'assistant', content: acc }
+          } else {
+            started = true
+            copy.push({ role: 'assistant', content: acc })
+          }
+          return copy
+        })
+      })
+
+      // Normalize the final bubble to the server's trimmed text.
+      setMessages((prev) => {
+        const copy = prev.slice()
+        if (copy.length && copy[copy.length - 1].role === 'assistant') {
+          copy[copy.length - 1] = { role: 'assistant', content: reply }
+        } else {
+          copy.push({ role: 'assistant', content: reply })
+        }
+        return copy
+      })
       setTurn(nextTurn)
 
       post({
@@ -121,9 +191,9 @@ function App() {
         participantId: pid,
       })
 
-      if (nextTurn >= MAX_TURNS || data.isFinal) {
+      if (nextTurn >= MAX_TURNS || isFinal) {
         setDone(true)
-        const transcript = [...messages, userMessage, { role: 'assistant', content: reply }]
+        const transcript = [...historyForServer, userMessage, { role: 'assistant', content: reply }]
         post({
           type: 'chat_complete',
           sessionId: sessionIdRef.current,
@@ -135,7 +205,12 @@ function App() {
       }
     } catch (err) {
       setErrorMsg(err.message || 'Something went wrong. Please try sending again.')
-      setMessages((prev) => prev.slice(0, -1))
+      setMessages((prev) => {
+        let copy = prev.slice()
+        if (started && copy.length && copy[copy.length - 1].role === 'assistant') copy = copy.slice(0, -1)
+        if (copy.length && copy[copy.length - 1].role === 'user') copy = copy.slice(0, -1)
+        return copy
+      })
       setInput(text)
     } finally {
       setLoading(false)
@@ -150,6 +225,9 @@ function App() {
   }
 
   const remaining = Math.max(0, MAX_TURNS - turn)
+  // Show the typing dots only until the assistant starts streaming its reply.
+  const waitingForReply =
+    (loading || opening) && (messages.length === 0 || messages[messages.length - 1].role !== 'assistant')
 
   return (
     <div className="chat-app">
@@ -168,7 +246,7 @@ function App() {
             <div className="message-bubble">{msg.content}</div>
           </div>
         ))}
-        {(loading || opening) && (
+        {waitingForReply && (
           <div className="message message-assistant">
             <div className="message-bubble typing">...</div>
           </div>
