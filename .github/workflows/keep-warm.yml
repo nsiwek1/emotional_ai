@@ -1,0 +1,38 @@
+name: keep-warm
+
+# Render's free tier hibernates a service after ~15 min with no inbound
+# requests, which costs the next participant a 30-60s cold start. This pings
+# the backend's /healthz every 10 min to keep it awake during a study.
+#
+# Notes:
+# - Scheduled workflows run only from the default branch, and GitHub may delay
+#   cron runs under load, so this is "good enough" rather than exact. For
+#   tighter timing, use an external monitor (cron-job.org / UptimeRobot).
+# - Keep BACKEND_URL in sync with the frontend's VITE_BACKEND_URL.
+# - Trigger manually (Actions tab -> Run workflow) to warm it up right before
+#   opening the study.
+
+on:
+  push:
+    branches: [deploy-qualtrics-iframe-chat]
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+env:
+  BACKEND_URL: "https://emotional-ai-1-4alg.onrender.com"
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping /healthz
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -m 60 -o /dev/null -w "%{http_code}" "$BACKEND_URL/healthz") || code=000
+            echo "attempt $i -> HTTP $code"
+            if [ "$code" = "200" ]; then exit 0; fi
+            sleep 15
+          done
+          echo "::warning::backend /healthz did not return 200 after 3 attempts"
+          exit 1

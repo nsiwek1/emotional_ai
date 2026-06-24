@@ -1,16 +1,12 @@
 import path from "node:path";
+import { PassThrough } from "node:stream";
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import rateLimit from "@fastify/rate-limit";
 import OpenAI from "openai";
 import dotenv from "dotenv";
 import { classifyEmotionWithHF, envInt } from "../src/lib/emotion.mjs";
-import {
-  nextResponderTurnEmotion,
-  nextResponderTurnBaseline,
-  openerResponderTurnEmotion,
-  openerResponderTurnBaseline,
-} from "../src/lib/responder.mjs";
+import { buildOpenerInput, buildNextInput } from "../src/lib/responder.mjs";
 import { appendSessionTurn } from "../src/lib/log.mjs";
 
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
@@ -26,6 +22,9 @@ if (!OPENAI_KEY) {
   process.exit(1);
 }
 const MODEL = process.env.CONVERSATION_MODEL || "gpt-4o-mini";
+// Token streaming is on by default. Set STREAMING=0 to fall back to whole-reply
+// JSON responses without a code change (the frontend detects which it got).
+const STREAMING = (process.env.STREAMING ?? "1") !== "0";
 const openai = new OpenAI({ apiKey: OPENAI_KEY });
 
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "http://localhost:5173")
@@ -96,52 +95,123 @@ const openBodySchema = {
 
 fastify.get("/healthz", async () => ({ ok: true }));
 
+// Awaits the (logging-only) HF classification and appends the turn. Never throws
+// into the request path.
+async function logTurn(request, hfPromise, logRow, assistant) {
+  try {
+    const { recognizedEmotion, hf } = await hfPromise;
+    if (hf?.error) {
+      request.log.warn({ hfError: hf.error, sessionId: logRow.sessionId }, "HF classify failed; neutral fallback");
+    }
+    await appendSessionTurn({
+      ...logRow,
+      assistant,
+      recognized_emotion: recognizedEmotion,
+      hf_emotion: hf,
+      model: MODEL,
+    });
+  } catch (err) {
+    request.log.warn({ err: err?.message, sessionId: logRow.sessionId }, "Failed to append session log");
+  }
+}
+
+// Streams the model reply to the client as SSE while accumulating the full text
+// for logging. HF classification runs concurrently (it never steers the reply).
+async function streamReply(request, reply, { classifyText, input, logRow, turn, isFinal }) {
+  const hfPromise = classifyEmotionWithHF(classifyText, { sleepMsBetween: envInt("HF_SLEEP_MS", 0) });
+
+  let llmStream;
+  try {
+    llmStream = await openai.responses.create({ model: MODEL, input, stream: true });
+  } catch (err) {
+    request.log.error({ err: err?.message, sessionId: logRow.sessionId }, "OpenAI stream create failed");
+    hfPromise.catch(() => {});
+    return reply.code(502).send({ error: err?.message || "OpenAI request failed", code: "openai_failed" });
+  }
+
+  reply.header("Content-Type", "text/event-stream; charset=utf-8");
+  reply.header("Cache-Control", "no-cache, no-transform");
+  reply.header("X-Accel-Buffering", "no");
+
+  const sse = new PassThrough();
+  sse.on("error", () => {});
+  let clientGone = false;
+  const send = (obj) => {
+    if (!clientGone && !sse.writableEnded) sse.write(`data: ${JSON.stringify(obj)}\n\n`);
+  };
+  request.raw.on("close", () => {
+    clientGone = true;
+    try { llmStream.controller?.abort?.(); } catch { /* noop */ }
+  });
+
+  (async () => {
+    let full = "";
+    let errored = false;
+    try {
+      for await (const event of llmStream) {
+        if (clientGone) break;
+        if (event.type === "response.output_text.delta" && event.delta) {
+          full += event.delta;
+          send({ type: "delta", text: event.delta });
+        }
+      }
+    } catch (err) {
+      errored = true;
+      request.log.error({ err: err?.message, sessionId: logRow.sessionId }, "OpenAI stream errored mid-flight");
+    }
+    full = full.trim();
+    if (!full) {
+      send({ type: "error", error: errored ? "stream_failed" : "empty_response" });
+    } else {
+      send({ type: "done", turn, isFinal, reply: full });
+    }
+    if (!sse.writableEnded) sse.end();
+    if (full && !clientGone) await logTurn(request, hfPromise, logRow, full);
+    else hfPromise.catch(() => {});
+  })();
+
+  return reply.send(sse);
+}
+
+// Non-streaming fallback (STREAMING=0): a single JSON response with the whole reply.
+async function jsonReply(request, reply, { classifyText, input, logRow, turn, isFinal }) {
+  const hfPromise = classifyEmotionWithHF(classifyText, { sleepMsBetween: envInt("HF_SLEEP_MS", 0) });
+  let full;
+  try {
+    const response = await openai.responses.create({ model: MODEL, input });
+    full = response.output_text?.trim();
+    if (!full) throw new Error("Responder returned empty text.");
+  } catch (err) {
+    request.log.error({ err: err?.message, sessionId: logRow.sessionId }, "OpenAI call failed");
+    hfPromise.catch(() => {});
+    return reply.code(502).send({ error: err?.message || "OpenAI request failed", code: "openai_failed" });
+  }
+  await logTurn(request, hfPromise, logRow, full);
+  return { reply: full, turn, isFinal };
+}
+
+function handleTurn(request, reply, ctx) {
+  return STREAMING ? streamReply(request, reply, ctx) : jsonReply(request, reply, ctx);
+}
+
 fastify.post("/chat/open", { schema: { body: openBodySchema } }, async (request, reply) => {
   const { sessionId, participantId, condition, eventDescription } = request.body;
-
-  // Classified for logging only (both arms); the label never steers the bot.
-  const { recognizedEmotion, hf } = await classifyEmotionWithHF(eventDescription, {
-    sleepMsBetween: envInt("HF_SLEEP_MS", 0),
-  });
-  if (hf?.error) {
-    request.log.warn({ hfError: hf.error, sessionId }, "HF classify failed on opener; falling back to neutral");
-  }
-
-  let openingText;
-  try {
-    if (condition === "emotion_enhanced") {
-      openingText = await openerResponderTurnEmotion(openai, eventDescription, MODEL);
-    } else {
-      openingText = await openerResponderTurnBaseline(openai, eventDescription, MODEL);
-    }
-  } catch (err) {
-    request.log.error({ err: err?.message, sessionId }, "OpenAI opener call failed");
-    return reply.code(502).send({
-      error: err?.message || "OpenAI request failed",
-      code: "openai_failed",
-    });
-  }
-
-  try {
-    await appendSessionTurn({
+  return handleTurn(request, reply, {
+    classifyText: eventDescription,
+    input: buildOpenerInput(condition, eventDescription),
+    logRow: {
       sessionId,
       participantId,
       condition,
       turn: 0,
       user: null,
-      assistant: openingText,
       is_opening: true,
       event_description: eventDescription,
-      recognized_emotion: recognizedEmotion,
-      hf_emotion: hf,
-      model: MODEL,
       is_final: false,
-    });
-  } catch (err) {
-    request.log.warn({ err: err?.message, sessionId }, "Failed to append opener log");
-  }
-
-  return { reply: openingText, turn: 0, isFinal: false };
+    },
+    turn: 0,
+    isFinal: false,
+  });
 });
 
 fastify.post("/chat", { schema: { body: chatBodySchema } }, async (request, reply) => {
@@ -157,49 +227,21 @@ fastify.post("/chat", { schema: { body: chatBodySchema } }, async (request, repl
   }
   transcript.push({ round: turn, speaker: "persona_agent", content: userMessage });
 
-  // Classified for logging only (both arms); the label never steers the bot.
-  const { recognizedEmotion, hf } = await classifyEmotionWithHF(userMessage, {
-    sleepMsBetween: envInt("HF_SLEEP_MS", 0),
-  });
-  if (hf?.error) {
-    request.log.warn({ hfError: hf.error, sessionId }, "HF classify failed; falling back to neutral");
-  }
-
-  let replyText;
-  try {
-    if (condition === "emotion_enhanced") {
-      replyText = await nextResponderTurnEmotion(openai, transcript, turn, MODEL);
-    } else {
-      replyText = await nextResponderTurnBaseline(openai, transcript, turn, MODEL);
-    }
-  } catch (err) {
-    request.log.error({ err: err?.message, sessionId }, "OpenAI call failed");
-    return reply.code(502).send({
-      error: err?.message || "OpenAI request failed",
-      code: "openai_failed",
-    });
-  }
-
   const isFinal = turn >= MAX_TURNS;
-
-  try {
-    await appendSessionTurn({
+  return handleTurn(request, reply, {
+    classifyText: userMessage,
+    input: buildNextInput(condition, transcript, turn),
+    logRow: {
       sessionId,
       participantId,
       condition,
       turn,
       user: userMessage,
-      assistant: replyText,
-      recognized_emotion: recognizedEmotion,
-      hf_emotion: hf,
-      model: MODEL,
       is_final: isFinal,
-    });
-  } catch (err) {
-    request.log.warn({ err: err?.message, sessionId }, "Failed to append session log");
-  }
-
-  return { reply: replyText, turn, isFinal };
+    },
+    turn,
+    isFinal,
+  });
 });
 
 fastify.setErrorHandler((err, request, reply) => {
