@@ -13,6 +13,8 @@ name: keep-warm
 #   opening the study.
 
 on:
+  push:
+    branches: [deploy-qualtrics-iframe-chat]
   schedule:
     - cron: "*/10 * * * *"
   workflow_dispatch: {}
